@@ -27,7 +27,7 @@ function Navbar() {
               <Button>Sobre</Button>
             </Grid>
             <Grid item>
-              <Button>Lista</Button>
+              <Button>Login</Button>
             </Grid>
           </Grid>
         </Toolbar>

@@ -38,62 +38,112 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function LoginForm() {
+function LoginFormMUI() {
   const classes = useStyles();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showForgotPassword, setShowForgotPassword] = useState(false);
 
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(`Email: ${email}, Senha: ${password}`);
   };
 
+  const handleForgotPasswordSubmit = () => {
+    setShowForgotPassword(true);
+  };
+
+  const handleBackClick = () => {
+    setShowForgotPassword(false);
+  };
+
   return (
     <div className={classes.root}>
       <Typography variant="h4" component="h1" gutterBottom>
-        Entre
+        Bem-vindo ao Lorem Ipsum
       </Typography>
-      <form className={classes.form} onSubmit={handleSubmit}>
-        <TextField
-          id="email"
-          label="Email"
-          type="email"
-          required
-          variant="outlined"
-          fullWidth
-          className={classes.input}
-          value={email}
-          onChange={(event) => setEmail(event.target.value)}
-        />
-        <TextField
-          id="password"
-          label="Senha"
-          type="password"
-          required
-          variant="outlined"
-          fullWidth
-          className={classes.input}
-          value={password}
-          onChange={(event) => setPassword(event.target.value)}
-        />
-        <Button
-          type="submit"
-          variant="contained"
-          color="primary"
-          fullWidth
-          className={classes.button}
-        >
-          Entrar
-        </Button>
-        <Button size="small" variant="text" className={classes.forgotPassword}>
-          Não possui conta? Cadastre-se
-        </Button>
-        <Button size="small" variant="text" className={classes.forgotPassword}>
-          Esqueceu a senha?
-        </Button>
-      </form>
+      {showForgotPassword ? (
+        <form className={classes.form} onSubmit={handleForgotPasswordSubmit}>
+          <TextField
+            id="email"
+            label="Email"
+            type="email"
+            required
+            variant="outlined"
+            fullWidth
+            className={classes.input}
+            value={email}
+            onChange={(event) => setEmail(event.target.value)}
+          />
+          <Button
+            type="submit"
+            variant="contained"
+            color="primary"
+            fullWidth
+            className={classes.button}
+          >
+            Enviar
+          </Button>
+          <Button
+            size="small"
+            variant="text"
+            className={classes.forgotPassword}
+            onClick={() => setShowForgotPassword(false)}
+          >
+            Voltar
+          </Button>
+        </form>
+      ) : (
+        <form className={classes.form} onSubmit={handleSubmit}>
+          <TextField
+            id="email"
+            label="Email"
+            type="email"
+            required
+            variant="outlined"
+            fullWidth
+            className={classes.input}
+            value={email}
+            onChange={(event) => setEmail(event.target.value)}
+          />
+          <TextField
+            id="password"
+            label="Senha"
+            type="password"
+            required
+            variant="outlined"
+            fullWidth
+            className={classes.input}
+            value={password}
+            onChange={(event) => setPassword(event.target.value)}
+          />
+          <Button
+            type="submit"
+            variant="contained"
+            color="primary"
+            fullWidth
+            className={classes.button}
+          >
+            Entrar
+          </Button>
+          <Button
+            size="small"
+            variant="text"
+            className={classes.forgotPassword}
+            onClick={() => setShowForgotPassword(true)}
+          >
+            Esqueceu a senha?
+          </Button>
+          <Button
+            size="small"
+            variant="text"
+            className={classes.forgotPassword}
+          >
+            Não possui conta? Cadastre-se
+          </Button>
+        </form>
+      )}
     </div>
   );
 }
-
-export default LoginForm;
+export default LoginFormMUI;
