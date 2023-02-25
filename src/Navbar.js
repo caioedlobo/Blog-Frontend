@@ -21,13 +21,15 @@ function Navbar() {
         <Toolbar>
           <Grid container justifyContent="center" spacing={10}>
             <Grid item>
-              <Button variant="h6">Feed</Button>
+              <Button variant="h6" style={{ color: "white" }}>
+                Feed
+              </Button>
             </Grid>
             <Grid item>
-              <Button>Sobre</Button>
+              <Button style={{ color: "white" }}>Sobre</Button>
             </Grid>
             <Grid item>
-              <Button>Login</Button>
+              <Button style={{ color: "white" }}>Login</Button>
             </Grid>
           </Grid>
         </Toolbar>

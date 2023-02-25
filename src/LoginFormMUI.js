@@ -59,14 +59,19 @@ function LoginFormMUI() {
 
   return (
     <div className={classes.root}>
-      <Typography variant="h4" component="h1" gutterBottom>
+      <Typography
+        variant="h4"
+        component="h1"
+        gutterBottom
+        style={{ color: "white" }}
+      >
         Bem-vindo ao Lorem Ipsum
       </Typography>
       {showForgotPassword ? (
         <form className={classes.form} onSubmit={handleForgotPasswordSubmit}>
           <TextField
             id="email"
-            label="Email"
+            label="Digite o Email de recuperacão"
             type="email"
             required
             variant="outlined"
