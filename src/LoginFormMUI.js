@@ -10,6 +10,7 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     alignItems: "center",
     minHeight: "100vh",
+    marginTop: "40px",
     /* background: "linear-gradient(45deg, #141e30 10%, #243b55 90%)", */
   },
   form: {
@@ -50,7 +51,7 @@ function LoginForm() {
   return (
     <div className={classes.root}>
       <Typography variant="h4" component="h1" gutterBottom>
-        Login
+        Entre
       </Typography>
       <form className={classes.form} onSubmit={handleSubmit}>
         <TextField
@@ -83,6 +84,9 @@ function LoginForm() {
           className={classes.button}
         >
           Entrar
+        </Button>
+        <Button size="small" variant="text" className={classes.forgotPassword}>
+          Não possui conta? Cadastre-se
         </Button>
         <Button size="small" variant="text" className={classes.forgotPassword}>
           Esqueceu a senha?
