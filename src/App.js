@@ -1,25 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import ReactDOM from "react-dom";
+import { ThemeProvider, createTheme } from "@material-ui/core/styles";
+import { CssBaseline } from "@material-ui/core";
+import LoginForm from "./LoginForm";
+import Home from "./pages/Home";
+
+const theme = createTheme();
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div
+      style={{ background: "linear-gradient(45deg, #141e30 10%, #243b55 90%)" }}
+    >
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Home />
+      </ThemeProvider>
     </div>
   );
 }
 
+ReactDOM.render(<App />, document.getElementById("root"));
 export default App;
