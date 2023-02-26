@@ -10,7 +10,6 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     alignItems: "center",
     minHeight: "100vh",
-    marginTop: "40px",
     /* background: "linear-gradient(45deg, #141e30 10%, #243b55 90%)", */
   },
   form: {

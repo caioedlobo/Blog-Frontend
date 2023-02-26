@@ -25,6 +25,7 @@ function CardFeed(props) {
       style={{
         display: "flex",
         justifyContent: "center",
+        marginBottom: "20px",
       }}
     >
       <Card
@@ -56,7 +57,7 @@ function CardFeed(props) {
                   marginBottom: "5px",
                   display: "flex",
                   flexDirection: "column",
-                  alignItems: "center",
+                  alignItems: "start",
                   width: "100%",
                 }}
               >
@@ -66,14 +67,18 @@ function CardFeed(props) {
                     size="small"
                     variant="contained"
                     onClick={handleShowFullText}
-                    style={{ maxWidth: 140 }}
+                    style={{
+                      maxWidth: 140,
+                      margin: 10,
+                      alignSelf: "end",
+                    }}
                   >
                     {showFullText ? "Esconder" : "Mostrar mais"}
                   </Button>
                 )}
               </Typography>
             </Box>
-            <Box textAlign="right">
+            <Box style={{ textAlign: "right" }}>
               <Typography color="textSecondary" variant="body4" component="p">
                 name
               </Typography>
