@@ -4,6 +4,7 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Grid from "@material-ui/core/Grid";
 import { Button } from "@material-ui/core";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -20,15 +21,21 @@ function Navbar() {
         <Toolbar>
           <Grid container justifyContent="center" spacing={10}>
             <Grid item>
-              <Button variant="h6" style={{ color: "white" }}>
-                Feed
-              </Button>
+              <Link to="/feed">
+                <Button variant="h6" style={{ color: "white" }}>
+                  Feed
+                </Button>
+              </Link>
             </Grid>
             <Grid item>
-              <Button style={{ color: "white" }}>Sobre</Button>
+              <Link to="/about">
+                <Button style={{ color: "white" }}>Sobre</Button>
+              </Link>
             </Grid>
             <Grid item>
-              <Button style={{ color: "white" }}>Login</Button>
+              <Link to="/login">
+                <Button style={{ color: "white" }}>Login</Button>
+              </Link>
             </Grid>
           </Grid>
         </Toolbar>

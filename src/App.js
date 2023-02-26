@@ -2,7 +2,9 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { ThemeProvider, createTheme } from "@material-ui/core/styles";
 import { CssBaseline } from "@material-ui/core";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
+import Feed from "./pages/Feed";
 
 const theme = createTheme();
 
@@ -13,7 +15,12 @@ function App() {
     >
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <Home />
+        <Router>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/feed" element={<Feed />} />
+          </Routes>
+        </Router>
       </ThemeProvider>
     </div>
   );
