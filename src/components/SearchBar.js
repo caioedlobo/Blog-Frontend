@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { InputBase, IconButton, makeStyles, Paper } from "@material-ui/core";
 import { Search as SearchIcon } from "@material-ui/icons";
 
@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function SearchBar(props) {
-  const [searchText, setSearchText] = useState("");
+  const { onSearchTextChange } = props;
   const classes = useStyles();
 
   const handleSearch = (e) => {
@@ -31,16 +31,20 @@ function SearchBar(props) {
   };
 
   const handleTextChange = (e) => {
-    setSearchText(e.target.value);
+    onSearchTextChange(e);
   };
 
   return (
-    <Paper component="form" className={classes.root} onSubmit={handleSearch}>
+    <Paper
+      component="form"
+      className={classes.root}
+      onSubmit={handleSearch}
+      style={{ width: "100%", maxWidth: "600px", marginBottom: "20px" }}
+    >
       <InputBase
         className={classes.input}
         placeholder="Pesquisar..."
         inputProps={{ "aria-label": "search posts" }}
-        value={searchText}
         onChange={handleTextChange}
       />
       <IconButton

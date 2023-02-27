@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import React, { useState } from "react";
 import {
   Card,
   Button,
@@ -9,16 +9,25 @@ import {
 } from "@material-ui/core";
 
 function CardFeed(props) {
-  const { title, text, name } = props;
+  const { title, text, name, searchQuery } = props;
 
   const [showFullText, setShowFullText] = useState(false);
 
   const handleShowFullText = () => {
     setShowFullText(!showFullText);
   };
+
   const maxSizeText = 200;
-  let text1 =
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas nec quam porttitor, viverra metus vitae, eleifend nisl. Quisque euismod nibh cursus, molestie erat eget, vestibulum dolor. Aliquam erat volutpat. Phasellus fermentum aliquet mi, e";
+  let trimmedText =
+    text.length > maxSizeText ? text.slice(0, maxSizeText) + "..." : text;
+
+  const highlightQuery = (str, query) => {
+    const regex = new RegExp(`(${query})`, "gi");
+    return str.replace(regex, `<mark>$1</mark>`);
+  };
+
+  const highlightedTitle = highlightQuery(title, searchQuery);
+  const highlightedText = highlightQuery(text, searchQuery);
 
   return (
     <Container
@@ -49,9 +58,8 @@ function CardFeed(props) {
                 variant="h5"
                 component="h2"
                 style={{ marginBottom: "10px" }}
-              >
-                Título do texto
-              </Typography>
+                dangerouslySetInnerHTML={{ __html: highlightedTitle }}
+              />
               <Typography
                 style={{
                   marginBottom: "5px",
@@ -60,27 +68,28 @@ function CardFeed(props) {
                   alignItems: "start",
                   width: "100%",
                 }}
-              >
-                {showFullText ? text1 : text1.slice(0, maxSizeText) + "..."}
-                {text1.length > maxSizeText && (
-                  <Button
-                    size="small"
-                    variant="contained"
-                    onClick={handleShowFullText}
-                    style={{
-                      maxWidth: 140,
-                      margin: 10,
-                      alignSelf: "end",
-                    }}
-                  >
-                    {showFullText ? "Esconder" : "Mostrar mais"}
-                  </Button>
-                )}
-              </Typography>
+                dangerouslySetInnerHTML={{
+                  __html: showFullText ? highlightedText : trimmedText,
+                }}
+              />
+              {text.length > maxSizeText && (
+                <Button
+                  size="small"
+                  variant="contained"
+                  onClick={handleShowFullText}
+                  style={{
+                    maxWidth: 140,
+                    margin: 10,
+                    alignSelf: "end",
+                  }}
+                >
+                  {showFullText ? "Esconder" : "Mostrar mais"}
+                </Button>
+              )}
             </Box>
             <Box style={{ textAlign: "right" }}>
               <Typography color="textSecondary" variant="body4" component="p">
-                name
+                {name}
               </Typography>
             </Box>
           </Box>
