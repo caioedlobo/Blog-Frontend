@@ -20,6 +20,8 @@ function App() {
         <Router>
           <Routes>
             <Route path="/" element={<Feed />} />
+            <Route path="/Blog-Frontend" element={<Feed />} />
+            <Route path="/Blog-Frontend/login" element={<Home />} />
             <Route path="/login" element={<Home />} />
             <Route path="/feed" element={<Feed />} />
           </Routes>
