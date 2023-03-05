@@ -5,6 +5,7 @@ import { CssBaseline } from "@mui/material";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./components/pages/Home";
 import Feed from "./components/pages/Feed";
+import About from "./components/pages/About";
 
 const theme = createTheme();
 
@@ -13,6 +14,7 @@ function App() {
     <div
       style={{
         background: "linear-gradient(45deg, #141e30 10%, #243b55 90%)",
+        height: "100vh",
       }}
     >
       <ThemeProvider theme={theme}>
@@ -20,8 +22,7 @@ function App() {
         <Router>
           <Routes>
             <Route path="/" element={<Feed />} />
-            <Route path="/Blog-Frontend" element={<Feed />} />
-            <Route path="/Blog-Frontend/login" element={<Home />} />
+            <Route path="/about" element={<About />} />
             <Route path="/login" element={<Home />} />
             <Route path="/feed" element={<Feed />} />
           </Routes>
