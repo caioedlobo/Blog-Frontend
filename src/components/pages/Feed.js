@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Navbar from "../Navbar";
 import CardFeed from "../CardFeed";
-import SearchBar from ".././SearchBarSearchBar";
+import SearchBar from "../SearchBar/SearchBar";
 
 const posts = [
   {
@@ -22,7 +22,8 @@ const posts = [
 ];
 
 const Feed = () => {
-  const [/* searchText, */ setSearchText] = useState("");
+  // eslint-disable-next-line
+  const [searchText, setSearchText] = useState("");
   const [filteredPosts, setFilteredPosts] = useState(posts);
 
   const handleSearchTextChange = (event) => {
