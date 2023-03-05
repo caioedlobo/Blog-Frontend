@@ -43,6 +43,15 @@ function LoginForm() {
       >
         Bem-vindo ao Lorem Ipsum
       </Typography>
+      <Typography
+        variant="h10"
+        component="h10"
+        gutterBottom
+        style={{ color: "white", marginBottom: "20px" }}
+      >
+        Esse é um sistema de um blog, onde usuários podem se cadastrar e criar
+        posts.
+      </Typography>
       {showRegistrationForm ? (
         <form
           style={{
@@ -55,7 +64,7 @@ function LoginForm() {
             marginTop: 16,
             marginBottom: 16,
             padding: 8,
-            border: "1px solid #1976d2",
+            /* border: "1px solid #1976d2", */
             borderRadius: 4,
             background: "linear-gradient(45deg, #bdc3c7 10%, #ffff 90%)",
           }}
@@ -133,7 +142,7 @@ function LoginForm() {
                 marginTop: 16,
                 marginBottom: 16,
                 padding: 16,
-                border: `1px solid ${"primary"}`,
+                /* border: `1px solid ${"primary"}`, */
                 borderRadius: 4,
                 background: "linear-gradient(45deg, #bdc3c7 10%, #ffff 90%)",
               }}
@@ -180,7 +189,7 @@ function LoginForm() {
                 marginTop: 16,
                 marginBottom: 16,
                 padding: 8,
-                border: "1px solid #1976d2",
+                /* border: "1px solid #1976d2", */
                 borderRadius: 4,
                 background: "linear-gradient(45deg, #bdc3c7 10%, #ffff 90%)",
               }}
