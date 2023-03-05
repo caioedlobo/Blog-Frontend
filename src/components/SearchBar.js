@@ -1,6 +1,8 @@
 import React from "react";
-import { InputBase, IconButton, makeStyles, Paper } from "@material-ui/core";
-import { Search as SearchIcon } from "@material-ui/icons";
+import { InputBase, IconButton } from "@mui/material";
+import { makeStyles } from "@mui/styles";
+import Paper from "@mui/material/Paper";
+import { Search as SearchIcon } from "@mui/icons-material";
 
 const useStyles = makeStyles((theme) => ({
   root: {

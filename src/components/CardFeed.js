@@ -6,7 +6,7 @@ import {
   Typography,
   Box,
   Container,
-} from "@material-ui/core";
+} from "@mui/material";
 
 function CardFeed(props) {
   const { title, text, name, searchQuery } = props;

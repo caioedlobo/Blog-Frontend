@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { ThemeProvider, createTheme } from "@material-ui/core/styles";
-import { CssBaseline } from "@material-ui/core";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+import { CssBaseline } from "@mui/material";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./components/pages/Home";
 import Feed from "./components/pages/Feed";
