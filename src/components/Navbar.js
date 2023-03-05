@@ -1,23 +1,13 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Grid from "@mui/material/Grid";
 import { Button } from "@mui/material";
 import { Link } from "react-router-dom";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-    marginBottom: "30px",
-  },
-}));
-
 function Navbar() {
-  const classes = useStyles();
-
   return (
-    <div className={classes.root}>
+    <div style={{ flexGrow: "1", marginBottom: "30px" }}>
       <AppBar position="static" color="transparent" elevation={0}>
         <Toolbar>
           <Grid container justifyContent="center" spacing={10}>

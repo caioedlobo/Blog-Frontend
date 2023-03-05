@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Navbar from "../Navbar";
 import CardFeed from "../CardFeed";
-import SearchBar from "../SearchBar";
+import SearchBar from ".././SearchBar/SearchBar";
 
 const posts = [
   {

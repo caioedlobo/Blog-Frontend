@@ -1,45 +1,9 @@
 import React, { useState } from "react";
-import { makeStyles } from "@mui/styles";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    minHeight: "100vh",
-    /* background: "linear-gradient(45deg, #141e30 10%, #243b55 90%)", */
-  },
-  form: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    width: "100%",
-    maxWidth: 400,
-    minWidth: 400,
-    marginTop: theme.spacing(3),
-    marginBottom: theme.spacing(3),
-    padding: theme.spacing(2),
-    border: `1px solid ${theme.palette.primary.main}`,
-    borderRadius: theme.shape.borderRadius,
-    background: "linear-gradient(45deg, #bdc3c7 10%, #ffff 90%)",
-  },
-  input: {
-    marginBottom: theme.spacing(2),
-  },
-  button: {
-    marginTop: theme.spacing(2),
-  },
-  forgotPassword: {
-    marginTop: theme.spacing(1),
-    fontSize: "0.8rem",
-  },
-}));
-
 function LoginForm() {
-  const classes = useStyles();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showForgotPassword, setShowForgotPassword] = useState(false);
@@ -63,7 +27,14 @@ function LoginForm() {
   };
 
   return (
-    <div className={classes.root}>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        minHeight: "100vh",
+      }}
+    >
       <Typography
         variant="h4"
         component="h1"
@@ -73,7 +44,23 @@ function LoginForm() {
         Bem-vindo ao Lorem Ipsum
       </Typography>
       {showRegistrationForm ? (
-        <form className={classes.form} onSubmit={handleRegistrationSubmit}>
+        <form
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            width: "100%",
+            maxWidth: 400,
+            minWidth: 400,
+            marginTop: 16,
+            marginBottom: 16,
+            padding: 8,
+            border: "1px solid #1976d2",
+            borderRadius: 4,
+            background: "linear-gradient(45deg, #bdc3c7 10%, #ffff 90%)",
+          }}
+          onSubmit={handleRegistrationSubmit}
+        >
           <TextField
             id="name"
             label="Primeiro nome"
@@ -81,7 +68,7 @@ function LoginForm() {
             required
             variant="outlined"
             fullWidth
-            className={classes.input}
+            style={{ marginBottom: "15px" }}
           />
           <TextField
             id="name"
@@ -90,7 +77,7 @@ function LoginForm() {
             required
             variant="outlined"
             fullWidth
-            className={classes.input}
+            style={{ marginBottom: "15px" }}
           />
           <TextField
             id="email"
@@ -99,7 +86,7 @@ function LoginForm() {
             required
             variant="outlined"
             fullWidth
-            className={classes.input}
+            style={{ marginBottom: "15px" }}
             value={email}
             onChange={(event) => setEmail(event.target.value)}
           />
@@ -110,7 +97,6 @@ function LoginForm() {
             required
             variant="outlined"
             fullWidth
-            className={classes.input}
             value={password}
             onChange={(event) => setPassword(event.target.value)}
           />
@@ -120,14 +106,14 @@ function LoginForm() {
             variant="contained"
             color="primary"
             fullWidth
-            className={classes.button}
+            style={{ marginTop: "20px" }}
           >
             Cadastrar
           </Button>
           <Button
             size="small"
             variant="text"
-            className={classes.forgotPassword}
+            style={{ marginTop: "10px", fontSize: "0.8rem" }}
             onClick={() => setShowRegistrationForm(false)}
           >
             Voltar
@@ -137,7 +123,20 @@ function LoginForm() {
         <div>
           {showForgotPassword ? (
             <form
-              className={classes.form}
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                width: "100%",
+                maxWidth: 400,
+                minWidth: 400,
+                marginTop: 16,
+                marginBottom: 16,
+                padding: 16,
+                border: `1px solid ${"primary"}`,
+                borderRadius: 4,
+                background: "linear-gradient(45deg, #bdc3c7 10%, #ffff 90%)",
+              }}
               onSubmit={handleForgotPasswordSubmit}
             >
               <TextField
@@ -147,7 +146,7 @@ function LoginForm() {
                 required
                 variant="outlined"
                 fullWidth
-                className={classes.input}
+                style={{ marginBottom: "15px" }}
                 value={email}
                 onChange={(event) => setEmail(event.target.value)}
               />
@@ -156,21 +155,37 @@ function LoginForm() {
                 variant="contained"
                 color="primary"
                 fullWidth
-                className={classes.button}
+                s
               >
                 Enviar
               </Button>
               <Button
                 size="small"
                 variant="text"
-                className={classes.forgotPassword}
+                style={{ marginTop: "8px", fontSize: "0.8rem" }}
                 onClick={() => setShowForgotPassword(false)}
               >
                 Voltar
               </Button>
             </form>
           ) : (
-            <form className={classes.form} onSubmit={handleSubmit}>
+            <form
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                width: "100%",
+                maxWidth: 400,
+                minWidth: 400,
+                marginTop: 16,
+                marginBottom: 16,
+                padding: 8,
+                border: "1px solid #1976d2",
+                borderRadius: 4,
+                background: "linear-gradient(45deg, #bdc3c7 10%, #ffff 90%)",
+              }}
+              onSubmit={handleSubmit}
+            >
               <TextField
                 id="email"
                 label="Email"
@@ -178,7 +193,7 @@ function LoginForm() {
                 required
                 variant="outlined"
                 fullWidth
-                className={classes.input}
+                style={{ marginBottom: "15px" }}
                 value={email}
                 onChange={(event) => setEmail(event.target.value)}
               />
@@ -189,7 +204,7 @@ function LoginForm() {
                 required
                 variant="outlined"
                 fullWidth
-                className={classes.input}
+                style={{ marginBottom: "15px" }}
                 value={password}
                 onChange={(event) => setPassword(event.target.value)}
               />
@@ -198,14 +213,13 @@ function LoginForm() {
                 variant="contained"
                 color="primary"
                 fullWidth
-                className={classes.button}
               >
                 Entrar
               </Button>
               <Button
                 size="small"
                 variant="text"
-                className={classes.forgotPassword}
+                style={{ marginTop: "10px", fontSize: "0.8rem" }}
                 onClick={() => setShowForgotPassword(true)}
               >
                 Esqueceu a senha?
@@ -213,7 +227,7 @@ function LoginForm() {
               <Button
                 size="small"
                 variant="text"
-                className={classes.forgotPassword}
+                style={{ marginTop: "theme.spacing(1)", fontSize: "0.8rem" }}
                 onClick={() => setShowRegistrationForm(true)}
               >
                 Não possui conta? Cadastre-se
