@@ -53,9 +53,20 @@ function LoginForm() {
     }
   };
 
-  const handleForgotPasswordSubmit = (event) => {
+  const handleForgotPasswordSubmit = async (event) => {
     event.preventDefault();
-    console.log(`Email: ${email}`);
+    try {
+      const response = await axios.post("link", {
+        firstname: firstName,
+        lastname: lastName,
+        email: email,
+        password: password,
+      });
+      console.log(response);
+      navigate("/feed");
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
