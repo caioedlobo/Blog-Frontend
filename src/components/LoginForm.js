@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import axios from "axios";
 
 function LoginForm() {
   const [email, setEmail] = useState("");
@@ -9,9 +10,20 @@ function LoginForm() {
   const [showForgotPassword, setShowForgotPassword] = useState(false);
   const [showRegistrationForm, setShowRegistrationForm] = useState(false);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(`Email: ${email}, Senha: ${password}`);
+    try {
+      const response = await axios.post(
+        "http://localhost:8080/api/auth/authenticate",
+        {
+          email: email,
+          password: password,
+        }
+      );
+      console.log(response.data);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const handleRegistrationSubmit = (event) => {
