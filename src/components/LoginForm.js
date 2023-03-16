@@ -2,35 +2,55 @@ import React, { useState } from "react";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+
   const [showForgotPassword, setShowForgotPassword] = useState(false);
   const [showRegistrationForm, setShowRegistrationForm] = useState(false);
+
+  const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post(
-        "http://localhost:8080/api/auth/authenticate",
-        {
+      await axios
+        .post("http://localhost:8080/api/auth/authenticate", {
           email: email,
           password: password,
-        }
-      );
-      console.log(response.data);
+        })
+        .then((res) => {
+          navigate("/feed");
+          console.log(res);
+          localStorage.setItem("token", res.data.token);
+        });
     } catch (error) {
       console.error(error);
     }
   };
 
-  const handleRegistrationSubmit = (event) => {
+  const handleRegistrationSubmit = async (event) => {
     event.preventDefault();
-    console.log(
-      `Nome: ${event.target.name.value}, Email: ${event.target.email.value}, Senha: ${event.target.password.value}`
-    );
+    try {
+      const response = await axios.post(
+        "http://localhost:8080/api/auth/register",
+        {
+          firstname: firstName,
+          lastname: lastName,
+          email: email,
+          password: password,
+        }
+      );
+      console.log(response);
+      navigate("/feed");
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const handleForgotPasswordSubmit = (event) => {
@@ -90,6 +110,7 @@ function LoginForm() {
             variant="outlined"
             fullWidth
             style={{ marginBottom: "15px" }}
+            onChange={(event) => setFirstName(event.target.value)}
           />
           <TextField
             id="name"
@@ -99,6 +120,7 @@ function LoginForm() {
             variant="outlined"
             fullWidth
             style={{ marginBottom: "15px" }}
+            onChange={(event) => setLastName(event.target.value)}
           />
           <TextField
             id="email"
