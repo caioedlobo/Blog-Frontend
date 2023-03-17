@@ -75,6 +75,7 @@ function LoginForm() {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
+        marginTop: "150px",
         minHeight: "100vh",
       }}
     >
@@ -109,6 +110,8 @@ function LoginForm() {
             padding: 8,
             /* border: "1px solid #1976d2", */
             borderRadius: 4,
+            zIndex: 1,
+
             background: "linear-gradient(45deg, #bdc3c7 10%, #ffff 90%)",
           }}
           onSubmit={handleRegistrationSubmit}
@@ -160,14 +163,14 @@ function LoginForm() {
             variant="contained"
             color="primary"
             fullWidth
-            style={{ marginTop: "20px" }}
+            style={{ marginTop: "20px", zIndex: 1 }}
           >
             Cadastrar
           </Button>
           <Button
             size="small"
             variant="text"
-            style={{ marginTop: "10px", fontSize: "0.8rem" }}
+            style={{ marginTop: "10px", fontSize: "0.8rem", zIndex: 1 }}
             onClick={() => setShowRegistrationForm(false)}
           >
             Voltar
@@ -190,6 +193,7 @@ function LoginForm() {
                 /* border: `1px solid ${"primary"}`, */
                 borderRadius: 4,
                 background: "linear-gradient(45deg, #bdc3c7 10%, #ffff 90%)",
+                zIndex: 1,
               }}
               onSubmit={handleForgotPasswordSubmit}
             >
@@ -200,7 +204,7 @@ function LoginForm() {
                 required
                 variant="outlined"
                 fullWidth
-                style={{ marginBottom: "15px" }}
+                style={{ marginBottom: "15px", zIndex: 1 }}
                 value={email}
                 onChange={(event) => setEmail(event.target.value)}
               />
@@ -209,14 +213,14 @@ function LoginForm() {
                 variant="contained"
                 color="primary"
                 fullWidth
-                s
+                style={{ zIndex: 1 }}
               >
                 Enviar
               </Button>
               <Button
                 size="small"
                 variant="text"
-                style={{ marginTop: "8px", fontSize: "0.8rem" }}
+                style={{ marginTop: "8px", fontSize: "0.8rem", zIndex: 1 }}
                 onClick={() => setShowForgotPassword(false)}
               >
                 Voltar
@@ -237,6 +241,7 @@ function LoginForm() {
                 /* border: "1px solid #1976d2", */
                 borderRadius: 4,
                 background: "linear-gradient(45deg, #bdc3c7 10%, #ffff 90%)",
+                zIndex: 1,
               }}
               onSubmit={handleSubmit}
             >
@@ -247,7 +252,10 @@ function LoginForm() {
                 required
                 variant="outlined"
                 fullWidth
-                style={{ marginBottom: "15px" }}
+                style={{
+                  marginBottom: "15px",
+                  zIndex: 1,
+                }}
                 value={email}
                 onChange={(event) => setEmail(event.target.value)}
               />
@@ -267,13 +275,14 @@ function LoginForm() {
                 variant="contained"
                 color="primary"
                 fullWidth
+                style={{ zIndex: 1 }}
               >
                 Entrar
               </Button>
               <Button
                 size="small"
                 variant="text"
-                style={{ marginTop: "10px", fontSize: "0.8rem" }}
+                style={{ marginTop: "10px", fontSize: "0.8rem", zIndex: 1 }}
                 onClick={() => setShowForgotPassword(true)}
               >
                 Esqueceu a senha?
@@ -281,7 +290,11 @@ function LoginForm() {
               <Button
                 size="small"
                 variant="text"
-                style={{ marginTop: "theme.spacing(1)", fontSize: "0.8rem" }}
+                style={{
+                  marginTop: "theme.spacing(1)",
+                  fontSize: "0.8rem",
+                  zIndex: 1,
+                }}
                 onClick={() => setShowRegistrationForm(true)}
               >
                 Não possui conta? Cadastre-se

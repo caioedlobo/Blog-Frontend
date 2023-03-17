@@ -13,19 +13,19 @@ function Navbar() {
           <Grid container justifyContent="center" spacing={10}>
             <Grid item>
               <Link to="/feed">
-                <Button variant="h6" style={{ color: "white" }}>
+                <Button variant="h6" style={{ color: "white", zIndex: 1 }}>
                   Feed
                 </Button>
               </Link>
             </Grid>
             <Grid item>
               <Link to="/about">
-                <Button style={{ color: "white" }}>Sobre</Button>
+                <Button style={{ color: "white", zIndex: 1 }}>Sobre</Button>
               </Link>
             </Grid>
             <Grid item>
               <Link to="/login">
-                <Button style={{ color: "white" }}>Login</Button>
+                <Button style={{ color: "white", zIndex: 1 }}>Login</Button>
               </Link>
             </Grid>
           </Grid>
