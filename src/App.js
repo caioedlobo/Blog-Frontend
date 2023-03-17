@@ -12,13 +12,7 @@ const theme = createTheme();
 
 function App() {
   return (
-    <div
-      className="background"
-      /* style={{
-        background: "linear-gradient(45deg, #141e30 10%, #243b55 90%)",
-        height: "100vh",
-      }} */
-    >
+    <div className="background">
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <Router>
