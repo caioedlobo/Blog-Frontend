@@ -19,7 +19,7 @@ function LoginForm() {
     event.preventDefault();
     try {
       await axios
-        .post(`${process.env.REACT_APP_API_URL}/api/auth/authenticate`, {
+        .post(`${process.env.REACT_APP_API_URL}/auth/authenticate`, {
           email: email,
           password: password,
         })
@@ -37,7 +37,7 @@ function LoginForm() {
     event.preventDefault();
     try {
       const response = await axios.post(
-        `${process.env.REACT_APP_API_URL}/api/auth/register`,
+        `${process.env.REACT_APP_API_URL}/auth/register`,
         {
           firstname: firstName,
           lastname: lastName,
