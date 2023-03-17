@@ -10,7 +10,6 @@ function LoginForm() {
   const [password, setPassword] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-
   const [showForgotPassword, setShowForgotPassword] = useState(false);
   const [showRegistrationForm, setShowRegistrationForm] = useState(false);
 
@@ -20,7 +19,7 @@ function LoginForm() {
     event.preventDefault();
     try {
       await axios
-        .post("http://localhost:8080/api/auth/authenticate", {
+        .post(`${process.env.REACT_APP_API_URL}/api/auth/authenticate`, {
           email: email,
           password: password,
         })
@@ -38,7 +37,7 @@ function LoginForm() {
     event.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:8080/api/auth/register",
+        `${process.env.REACT_APP_API_URL}/api/auth/register`,
         {
           firstname: firstName,
           lastname: lastName,
@@ -284,6 +283,7 @@ function LoginForm() {
                 variant="text"
                 style={{ marginTop: "10px", fontSize: "0.8rem", zIndex: 1 }}
                 onClick={() => setShowForgotPassword(true)}
+                disabled
               >
                 Esqueceu a senha?
               </Button>
