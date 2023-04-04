@@ -74,7 +74,7 @@ function LoginForm() {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        marginTop: "150px",
+        marginTop: "80px",
         minHeight: "100vh",
       }}
     >

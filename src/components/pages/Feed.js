@@ -10,6 +10,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
 import Button from "@mui/material/Button";
 import { TextField } from "@mui/material";
+import axios from "axios";
 
 const posts = [
   {
@@ -66,19 +67,35 @@ const Feed = () => {
     setText(event.target.value);
   };
 
-  const handleSave = () => {
-    const newPost = {
-      title: title,
-      text: text,
-      name: "Seu nome",
-    };
+  const handleSave = async (event) => {
+    event.preventDefault();
+    try {
+      await axios
+        .post(
+          `${process.env.REACT_APP_API_URL}/posts`,
+          {
+            title: title,
+            body: text,
+          },
+          {
+            headers: {
+              Authorization: "Bearer " + localStorage.getItem("token"),
+            },
+          }
+        )
+        .then(() => {
+          handleCloseForm();
+        });
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
-    const newPosts = [...posts, newPost];
+  /* const newPosts = [...posts, newPost];
     setFilteredPosts(newPosts);
     setTitle("");
     setText("");
-    handleCloseForm();
-  };
+    handleCloseForm(); */
 
   return (
     <>
@@ -116,6 +133,7 @@ const Feed = () => {
             label="Título"
             type="text"
             fullWidth
+            onChange={handleTitleChange}
           />
           <TextField
             margin="dense"
@@ -125,11 +143,12 @@ const Feed = () => {
             rows={5}
             fullWidth
             multiline
+            onChange={handleTextChange}
           />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleCloseForm}>Cancelar</Button>
-          <Button onClick={handleCloseForm}>Salvar</Button>
+          <Button onClick={handleSave}>Salvar</Button>
         </DialogActions>
       </Dialog>
     </>
