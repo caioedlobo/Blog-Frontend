@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "../Navbar";
 import CardFeed from "../CardFeed";
 import SearchBar from "../SearchBar/SearchBar";
@@ -12,7 +12,7 @@ import Button from "@mui/material/Button";
 import { TextField } from "@mui/material";
 import axios from "axios";
 
-const posts = [
+/* const posts = [
   {
     title: "Título do primeiro post",
     text: "Texto do primeiro post",
@@ -28,24 +28,41 @@ const posts = [
     text: "Texto do terceiro post",
     name: "Nome do autor 3",
   },
-];
+]; */
 
 const Feed = () => {
   // eslint-disable-next-line
-  const [searchText, setSearchText] = useState("");
-  const [filteredPosts, setFilteredPosts] = useState(posts);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filteredPosts, setFilteredPosts] = useState([]);
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [title, setTitle] = useState("");
-  const [text, setText] = useState("");
+  const [text, setBody] = useState("");
+  const [posts, setPosts] = useState([]);
 
-  const handleSearchTextChange = (event) => {
-    const text = event.target.value.toLowerCase();
-    setSearchText(text);
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const response = await axios.get(
+          `${process.env.REACT_APP_API_URL_DEV}/posts/all-posts/search?query=${searchQuery}`
+        );
+        setPosts(response.data);
+        setFilteredPosts(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchPosts();
+  }, [searchQuery]);
+
+  const handleSearchQueryChange = (event) => {
+    const query = event.target.value.toLowerCase();
+    setSearchQuery(query);
 
     const filtered = posts.filter(
       (post) =>
         post.title.toLowerCase().includes(text) ||
-        post.text.toLowerCase().includes(text) ||
+        post.body.toLowerCase().includes(text) ||
         post.name.toLowerCase().includes(text)
     );
     setFilteredPosts(filtered);
@@ -63,8 +80,8 @@ const Feed = () => {
     setTitle(event.target.value);
   };
 
-  const handleTextChange = (event) => {
-    setText(event.target.value);
+  const handleBodyChange = (event) => {
+    setBody(event.target.value);
   };
 
   const handleSave = async (event) => {
@@ -100,14 +117,14 @@ const Feed = () => {
   return (
     <>
       <Navbar />
-      <SearchBar onSearchTextChange={handleSearchTextChange} />
+      <SearchBar onSearchQueryChange={handleSearchQueryChange} />
 
       {filteredPosts.map((post, index) => (
         <CardFeed
           key={index}
           title={post.title}
-          text={post.text}
-          name={post.name}
+          text={post.body}
+          name={post.account.firstName + " " + post.account.lastName}
         />
       ))}
 
@@ -143,7 +160,7 @@ const Feed = () => {
             rows={5}
             fullWidth
             multiline
-            onChange={handleTextChange}
+            onChange={handleBodyChange}
           />
         </DialogContent>
         <DialogActions>

@@ -5,14 +5,14 @@ import Paper from "@mui/material/Paper";
 import { Search as SearchIcon } from "@mui/icons-material";
 
 function SearchBar(props) {
-  const { onSearchTextChange } = props;
+  const { onSearchQueryChange } = props;
 
   const handleSearch = (e) => {
     e.preventDefault();
   };
 
-  const handleTextChange = (e) => {
-    onSearchTextChange(e);
+  const handleQueryChange = (e) => {
+    onSearchQueryChange(e);
   };
 
   return (
@@ -26,7 +26,7 @@ function SearchBar(props) {
         className="input"
         placeholder="Pesquisar..."
         inputProps={{ "aria-label": "search posts" }}
-        onChange={handleTextChange}
+        onChange={handleQueryChange}
       />
       <IconButton type="submit" className="iconButton" aria-label="search">
         <SearchIcon />
