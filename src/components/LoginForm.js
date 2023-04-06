@@ -46,6 +46,7 @@ function LoginForm() {
         }
       );
       console.log(response);
+      localStorage.setItem("token", response.data.token);
       navigate("/feed");
     } catch (error) {
       console.error(error);
