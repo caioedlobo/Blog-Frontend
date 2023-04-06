@@ -99,17 +99,10 @@ function CardFeed(props) {
                 </Button>
               )}
             </Box>
-            <Box /* sx={{ textAlign: "center", background: "blue" }} */>
-              <Box style={{ textAlign: "right" }}>
-                <Typography color="textSecondary" variant="body4" component="p">
-                  {name}
-                </Typography>
-              </Box>
-              <Box style={{ textAlign: "right" }}>
-                <Typography color="textSecondary" variant="body2" component="p">
-                  {filteredDate}
-                </Typography>
-              </Box>
+            <Box textAlign={"right"}>
+              <Typography color="textSecondary" variant="body2" component="p">
+                {filteredDate + " ● " + name}
+              </Typography>
             </Box>
           </Box>
         </CardContent>
