@@ -9,9 +9,21 @@ import {
 } from "@mui/material";
 
 function CardFeed(props) {
-  const { title, text, name, searchQuery } = props;
+  const { title, text, name, date, searchQuery } = props;
 
   const [showFullText, setShowFullText] = useState(false);
+
+  const filteredDate = formatarData(date);
+
+  function formatarData(dateString) {
+    const date = new Date(dateString);
+    const hora = date.getHours().toString().padStart(2, "0");
+    const minutos = date.getMinutes().toString().padStart(2, "0");
+    const dia = date.getDate().toString().padStart(2, "0");
+    const mes = (date.getMonth() + 1).toString().padStart(2, "0");
+    const ano = date.getFullYear().toString();
+    return `${hora}:${minutos} - ${dia}/${mes}/${ano}`;
+  }
 
   const handleShowFullText = () => {
     setShowFullText(!showFullText);
@@ -87,10 +99,17 @@ function CardFeed(props) {
                 </Button>
               )}
             </Box>
-            <Box style={{ textAlign: "right" }}>
-              <Typography color="textSecondary" variant="body4" component="p">
-                {name}
-              </Typography>
+            <Box /* sx={{ textAlign: "center", background: "blue" }} */>
+              <Box style={{ textAlign: "right" }}>
+                <Typography color="textSecondary" variant="body4" component="p">
+                  {name}
+                </Typography>
+              </Box>
+              <Box style={{ textAlign: "right" }}>
+                <Typography color="textSecondary" variant="body2" component="p">
+                  {filteredDate}
+                </Typography>
+              </Box>
             </Box>
           </Box>
         </CardContent>

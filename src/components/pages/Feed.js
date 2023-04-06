@@ -37,7 +37,7 @@ const Feed = () => {
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [title, setTitle] = useState("");
   const [text, setBody] = useState("");
-
+  console.log(filteredPosts);
   useEffect(() => {
     const fetchPosts = async () => {
       try {
@@ -98,12 +98,6 @@ const Feed = () => {
     }
   };
 
-  /* const newPosts = [...posts, newPost];
-    setFilteredPosts(newPosts);
-    setTitle("");
-    setText("");
-    handleCloseForm(); */
-
   return (
     <>
       <Navbar />
@@ -115,6 +109,7 @@ const Feed = () => {
           title={post.title}
           text={post.body}
           name={post.account.firstName + " " + post.account.lastName}
+          date={post.createdAt}
         />
       ))}
 
