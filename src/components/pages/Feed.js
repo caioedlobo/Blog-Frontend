@@ -92,6 +92,7 @@ const Feed = () => {
         )
         .then(() => {
           handleCloseForm();
+          window.location.reload();
         });
     } catch (error) {
       console.error(error);
