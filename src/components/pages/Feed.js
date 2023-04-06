@@ -42,7 +42,7 @@ const Feed = () => {
     const fetchPosts = async () => {
       try {
         const response = await axios.get(
-          `${process.env.REACT_APP_API_URL_DEV}/posts/all-posts/search?query=${searchQuery}`
+          `${process.env.REACT_APP_API_URL}/posts/all-posts/search?query=${searchQuery}`
         );
         setFilteredPosts(response.data);
       } catch (error) {
