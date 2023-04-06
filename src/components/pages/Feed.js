@@ -37,7 +37,6 @@ const Feed = () => {
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [title, setTitle] = useState("");
   const [text, setBody] = useState("");
-  const [posts, setPosts] = useState([]);
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -45,7 +44,6 @@ const Feed = () => {
         const response = await axios.get(
           `${process.env.REACT_APP_API_URL_DEV}/posts/all-posts/search?query=${searchQuery}`
         );
-        setPosts(response.data);
         setFilteredPosts(response.data);
       } catch (error) {
         console.error(error);
@@ -58,14 +56,6 @@ const Feed = () => {
   const handleSearchQueryChange = (event) => {
     const query = event.target.value.toLowerCase();
     setSearchQuery(query);
-
-    const filtered = posts.filter(
-      (post) =>
-        post.title.toLowerCase().includes(text) ||
-        post.body.toLowerCase().includes(text) ||
-        post.name.toLowerCase().includes(text)
-    );
-    setFilteredPosts(filtered);
   };
 
   const handleOpenForm = () => {
