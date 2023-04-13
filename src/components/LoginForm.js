@@ -4,6 +4,9 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import Alert from "@mui/material/Alert";
+import AlertTitle from "@mui/material/AlertTitle";
+import Snackbar from "@mui/material/Snackbar";
 
 function LoginForm() {
   const [email, setEmail] = useState("");
@@ -12,6 +15,7 @@ function LoginForm() {
   const [lastName, setLastName] = useState("");
   const [showForgotPassword, setShowForgotPassword] = useState(false);
   const [showRegistrationForm, setShowRegistrationForm] = useState(false);
+  const [showSuccessAlert, setShowSuccessAlert] = useState(true);
 
   const navigate = useNavigate();
 
@@ -27,6 +31,7 @@ function LoginForm() {
           navigate("/feed");
           console.log(res);
           localStorage.setItem("token", res.data.token);
+          setShowSuccessAlert(true);
         });
     } catch (error) {
       console.error(error);
@@ -47,6 +52,7 @@ function LoginForm() {
       );
       console.log(response);
       localStorage.setItem("token", response.data.token);
+
       navigate("/feed");
     } catch (error) {
       console.error(error);
@@ -56,14 +62,13 @@ function LoginForm() {
   const handleForgotPasswordSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post("link", {
-        firstname: firstName,
-        lastname: lastName,
-        email: email,
-        password: password,
-      });
+      const response = await axios.post(
+        `${process.env.REACT_APP_API_URL}/forgot-password`,
+        {
+          email: email,
+        }
+      );
       console.log(response);
-      navigate("/feed");
     } catch (error) {
       console.error(error);
     }
@@ -214,6 +219,7 @@ function LoginForm() {
                 color="primary"
                 fullWidth
                 style={{ zIndex: 1 }}
+                onClick={handleForgotPasswordSubmit}
               >
                 Enviar
               </Button>
@@ -284,7 +290,6 @@ function LoginForm() {
                 variant="text"
                 style={{ marginTop: "10px", fontSize: "0.8rem", zIndex: 1 }}
                 onClick={() => setShowForgotPassword(true)}
-                disabled
               >
                 Esqueceu a senha?
               </Button>
