@@ -17,11 +17,18 @@ function LoginForm() {
   const [showForgotPassword, setShowForgotPassword] = useState(false);
   const [showRegistrationForm, setShowRegistrationForm] = useState(false);
   const [showSuccessAlert, setShowSuccessAlert] = useState(true);
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [message, setMessage] = useState("teste");
+  const [status, setStatus] = useState("success");
 
   const navigate = useNavigate();
 
   const handleCloseRegistrationForm = () => {
     setShowRegistrationForm(false);
+  };
+
+  const handleCloseForgotPasswordForm = () => {
+    setShowForgotPassword(false);
   };
 
   const handleSubmit = async (event) => {
@@ -33,33 +40,17 @@ function LoginForm() {
           password: password,
         })
         .then((res) => {
-          navigate("/feed");
-          console.log(res);
           localStorage.setItem("token", res.data.token);
-          setShowSuccessAlert(true);
+          setMessage("Autenticação realizada com sucesso!");
+          setStatus("success");
+          setOpenSnackbar(true);
+          //navigate("/feed");
+          console.log(res);
         });
     } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const handleRegistrationSubmit = async (event) => {
-    event.preventDefault();
-    try {
-      const response = await axios.post(
-        `${process.env.REACT_APP_API_URL}/auth/register`,
-        {
-          firstname: firstName,
-          lastname: lastName,
-          email: email,
-          password: password,
-        }
-      );
-      console.log(response);
-      localStorage.setItem("token", response.data.token);
-
-      navigate("/feed");
-    } catch (error) {
+      setMessage("Erro ao autenticar: " + error.response.data.errors);
+      setStatus("error");
+      setOpenSnackbar(true);
       console.error(error);
     }
   };
@@ -78,6 +69,7 @@ function LoginForm() {
       console.error(error);
     }
   };
+  console.log(openSnackbar);
 
   return (
     <div
@@ -89,6 +81,17 @@ function LoginForm() {
         minHeight: "100vh",
       }}
     >
+      <Snackbar
+        open={openSnackbar}
+        autoHideDuration={6000}
+        onClose={() => setOpenSnackbar(false)}
+        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+      >
+        <Alert severity={status} sx={{ width: "100%" }}>
+          {message}
+        </Alert>
+      </Snackbar>
+
       <Typography
         variant="h4"
         component="h1"
@@ -129,7 +132,6 @@ function LoginForm() {
                 background: "linear-gradient(45deg, #bdc3c7 10%, #ffff 90%)",
                 zIndex: 1,
               }}
-              onSubmit={handleForgotPasswordSubmit}
             >
               <TextField
                 id="email"
@@ -156,7 +158,7 @@ function LoginForm() {
                 size="small"
                 variant="text"
                 style={{ marginTop: "8px", fontSize: "0.8rem", zIndex: 1 }}
-                onClick={() => setShowForgotPassword(false)}
+                onClick={handleCloseForgotPasswordForm}
               >
                 Voltar
               </Button>
@@ -178,7 +180,6 @@ function LoginForm() {
                 background: "linear-gradient(45deg, #bdc3c7 10%, #ffff 90%)",
                 zIndex: 1,
               }}
-              onSubmit={handleSubmit}
             >
               <TextField
                 id="email"
@@ -211,6 +212,7 @@ function LoginForm() {
                 color="primary"
                 fullWidth
                 style={{ zIndex: 1 }}
+                onClick={handleSubmit}
               >
                 Entrar
               </Button>
