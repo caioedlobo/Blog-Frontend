@@ -44,7 +44,7 @@ function LoginForm() {
           setMessage("Autenticação realizada com sucesso!");
           setStatus("success");
           setOpenSnackbar(true);
-          //navigate("/feed");
+          navigate("/feed");
           console.log(res);
         });
     } catch (error) {

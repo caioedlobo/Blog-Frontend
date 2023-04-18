@@ -11,24 +11,9 @@ import DialogActions from "@mui/material/DialogActions";
 import Button from "@mui/material/Button";
 import { TextField } from "@mui/material";
 import axios from "axios";
-
-/* const posts = [
-  {
-    title: "Título do primeiro post",
-    text: "Texto do primeiro post",
-    name: "Nome do autor 1",
-  },
-  {
-    title: "Título do segundo post",
-    text: "Texto do segundo post",
-    name: "Nome do autor 2",
-  },
-  {
-    title: "Título do terceiro post",
-    text: "Texto do terceiro post",
-    name: "Nome do autor 3",
-  },
-]; */
+import Alert from "@mui/material/Alert";
+import AlertTitle from "@mui/material/AlertTitle";
+import Snackbar from "@mui/material/Snackbar";
 
 const Feed = () => {
   // eslint-disable-next-line
@@ -37,6 +22,9 @@ const Feed = () => {
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [title, setTitle] = useState("");
   const [text, setBody] = useState("");
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [messages, setMessages] = useState([]);
+  const [status, setStatus] = useState("success");
   console.log(filteredPosts);
   useEffect(() => {
     const fetchPosts = async () => {
@@ -93,14 +81,33 @@ const Feed = () => {
         .then(() => {
           handleCloseForm();
           window.location.reload();
+          setOpenSnackbar(true);
         });
-    } catch (error) {
-      console.error(error);
+    } catch (errors) {
+      console.log(errors);
+      setStatus("error");
+      if (errors.response.status === "400") {
+        setMessages("Erro: " + errors.response.data.errors.join(", "));
+      }
+      setMessages(
+        "Erro: Verifique se está logado ou tente novamente mais tarde."
+      );
+      setOpenSnackbar(true);
     }
   };
 
   return (
     <>
+      <Snackbar
+        open={openSnackbar}
+        autoHideDuration={6000}
+        onClose={() => setOpenSnackbar(false)}
+        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+      >
+        <Alert severity={status} sx={{ width: "100%" }}>
+          {messages}
+        </Alert>
+      </Snackbar>
       <Navbar />
       <SearchBar onSearchQueryChange={handleSearchQueryChange} />
 
@@ -122,6 +129,7 @@ const Feed = () => {
           right: "15px",
         }}
         onClick={handleOpenForm}
+        disabled={!localStorage.getItem("token")}
       >
         <AddIcon />
       </Fab>
