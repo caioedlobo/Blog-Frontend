@@ -159,7 +159,9 @@ const Feed = () => {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleCloseForm}>Cancelar</Button>
-          <Button onClick={handleSave}>Salvar</Button>
+          <Button onClick={handleSave} disabled={!title || !text}>
+            Salvar
+          </Button>
         </DialogActions>
       </Dialog>
     </>
