@@ -7,6 +7,7 @@ import Home from "./components/pages/Home/Home";
 import "./components/pages/Home/Home.css";
 import Feed from "./components/pages/Feed";
 import About from "./components/pages/About";
+import Account from "./components/pages/Account";
 
 const theme = createTheme();
 
@@ -21,6 +22,7 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/login" element={<Home />} />
             <Route path="/feed" element={<Feed />} />
+            <Route path="/feed" element={<Account />} />
           </Routes>
         </Router>
       </ThemeProvider>
