@@ -22,7 +22,7 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/login" element={<Home />} />
             <Route path="/feed" element={<Feed />} />
-            <Route path="/feed" element={<Account />} />
+            <Route path="/account" element={<Account />} />
           </Routes>
         </Router>
       </ThemeProvider>
