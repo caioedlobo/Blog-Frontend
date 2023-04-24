@@ -27,37 +27,54 @@ function MenuAccount() {
   };
 
   return (
-    <div
+    <Card
       style={{
         flexGrow: "1",
         display: "flex",
         justifyContent: "center",
         alignSelf: "center",
+        maxWidth: "150px",
+        /* background: "green", */
       }}
+      elevation={3}
     >
-      <AppBar position="static" color="transparent" elevation={0}>
-        <Toolbar>
-          <Grid
-            container
-            justifyContent="center"
-            spacing={0}
-            style={{ display: "flex", flexDirection: "column" }}
-          >
-            <Grid item>
-              <Button variant="h6" style={{ color: "white", zIndex: 1 }}>
-                Feed
-              </Button>
+      <CardContent>
+        <AppBar position="static" color="transparent" elevation={0}>
+          <Toolbar>
+            <Grid
+              container
+              justifyContent="center"
+              spacing={0}
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                /* background: "green", */
+                /* maxWidth: "120px", */
+                alignItems: "center",
+              }}
+            >
+              <Grid item>
+                <Button style={{ color: "black", zIndex: 1 }}>
+                  Alterar nome
+                </Button>
+              </Grid>
+              <Grid item>
+                <Button style={{ color: "black", zIndex: 1 }}>Seguranca</Button>
+              </Grid>
+              <Grid item>
+                <Button style={{ color: "black", zIndex: 1 }}>
+                  Meus posts
+                </Button>
+              </Grid>
+              <Grid item>
+                <Button style={{ color: "black", zIndex: 1 }}>Sair</Button>
+              </Grid>
             </Grid>
-            <Grid item>
-              <Button style={{ color: "white", zIndex: 1 }}>Sobre</Button>
-            </Grid>
-            <Grid item>
-              <Button style={{ color: "white", zIndex: 1 }}>Conta</Button>
-            </Grid>
-          </Grid>
-        </Toolbar>
-      </AppBar>
-    </div>
+          </Toolbar>
+        </AppBar>
+      </CardContent>
+    </Card>
   );
 }
+
 export default MenuAccount;

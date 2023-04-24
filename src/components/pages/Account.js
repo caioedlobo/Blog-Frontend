@@ -36,14 +36,15 @@ const Account = () => {
       <Navbar />
       <div
         style={{
-          display: "column",
           background: "red",
           justifyContent: "center",
           alignContent: "center",
           alignItems: "center",
+          maxWidth: "100%",
         }}
       >
         <MenuAccount />
+
         {posts.map((post) => (
           <CardFeed
             key={post.id}
