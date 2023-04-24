@@ -34,17 +34,27 @@ const Account = () => {
   return (
     <div>
       <Navbar />
+
       <div
         style={{
-          background: "red",
-          justifyContent: "center",
-          alignContent: "center",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
           alignItems: "center",
           maxWidth: "100%",
         }}
       >
         <MenuAccount />
 
+        {/* <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            flexDirection: "column",
+            flexGrow: 2,
+          }}
+        > */}
         {posts.map((post) => (
           <CardFeed
             key={post.id}
@@ -54,6 +64,7 @@ const Account = () => {
             date={post.createdAt}
           />
         ))}
+        {/* </div> */}
       </div>
     </div>
   );

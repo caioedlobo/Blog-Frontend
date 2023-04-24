@@ -29,12 +29,15 @@ function MenuAccount() {
   return (
     <Card
       style={{
-        flexGrow: "1",
+        /* flexGrow: "1", */
         display: "flex",
         justifyContent: "center",
         alignSelf: "center",
-        maxWidth: "150px",
+        alignItems: "center",
+        maxWidth: "490px",
         /* background: "green", */
+        maxHeight: "70px",
+        marginBottom: "30px",
       }}
       elevation={3}
     >
@@ -47,7 +50,7 @@ function MenuAccount() {
               spacing={0}
               style={{
                 display: "flex",
-                flexDirection: "column",
+                flexDirection: "row",
                 /* background: "green", */
                 /* maxWidth: "120px", */
                 alignItems: "center",
