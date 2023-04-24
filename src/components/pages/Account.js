@@ -1,9 +1,24 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "../Navbar";
 import CardFeed from "../CardFeed";
 import MenuAccount from "../MenuAccount";
+import axios from "axios";
 
 const Account = () => {
+  const [posts, setPosts] = useState([]);
+  const [accountId, setAccountId] = useState("1");
+
+  useEffect(() => {
+    axios
+      .get(`${process.env.REACT_APP_API_URL}/posts/all-posts/${accountId}`)
+      .then((response) => {
+        setPosts(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
   return (
     <div>
       <Navbar />
@@ -17,13 +32,15 @@ const Account = () => {
         }}
       >
         <MenuAccount />
-        <CardFeed
-          key={1}
-          title={"Teste"}
-          text={"Teste"}
-          name={"Teste"}
-          date={"Teste"}
-        />
+        {posts.map((post) => (
+          <CardFeed
+            key={post.id}
+            title={post.title}
+            text={post.body}
+            name={post.account.firstName + " " + post.account.lastName}
+            date={post.createdAt}
+          />
+        ))}
       </div>
     </div>
   );
