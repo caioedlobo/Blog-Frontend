@@ -6,7 +6,19 @@ import axios from "axios";
 
 const Account = () => {
   const [posts, setPosts] = useState([]);
-  const [accountId, setAccountId] = useState("1");
+  const [accountId, setAccountId] = useState();
+  useEffect(() => {
+    axios
+      .get(`${process.env.REACT_APP_API_URL}/accounts/account-id`, {
+        headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+      })
+      .then((response) => {
+        setAccountId(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   useEffect(() => {
     axios
@@ -17,7 +29,7 @@ const Account = () => {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [accountId]);
 
   return (
     <div>
