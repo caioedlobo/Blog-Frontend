@@ -20,7 +20,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
-function MenuAccount() {
+function MenuAccount(props) {
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = useState(null);
   const [confirmDialogOpen, setConfirmDialogOpen] = useState(false);
@@ -47,7 +47,6 @@ function MenuAccount() {
   const handleCancelQuit = () => {
     setConfirmDialogOpen(false);
   };
-  const handleChangeName = () => {};
 
   return (
     <Card
@@ -82,16 +81,24 @@ function MenuAccount() {
               <Grid item>
                 <Button
                   style={{ color: "black", zIndex: 1 }}
-                  onClick={handleChangeName}
+                  onClick={props.handleChangeStateName}
                 >
                   Alterar nome
                 </Button>
               </Grid>
               <Grid item>
-                <Button style={{ color: "black", zIndex: 1 }}>Seguranca</Button>
+                <Button
+                  style={{ color: "black", zIndex: 1 }}
+                  onClick={props.handleChangeStateSecurity}
+                >
+                  Seguranca
+                </Button>
               </Grid>
               <Grid item>
-                <Button style={{ color: "black", zIndex: 1 }}>
+                <Button
+                  style={{ color: "black", zIndex: 1 }}
+                  onClick={props.handleChangeStatePosts}
+                >
                   Meus posts
                 </Button>
               </Grid>
