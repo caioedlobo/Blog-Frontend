@@ -11,12 +11,17 @@ import {
   AppBar,
   Toolbar,
   Grid,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
 } from "@mui/material";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
 function MenuAccount() {
   const [anchorEl, setAnchorEl] = useState(null);
+  const [confirmDialogOpen, setConfirmDialogOpen] = useState(false);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -24,6 +29,21 @@ function MenuAccount() {
 
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const handleQuit = () => {
+    setConfirmDialogOpen(true);
+  };
+
+  const handleConfirmQuit = () => {
+    // Implementar a lógica de logout aqui
+    localStorage.removeItem("token");
+
+    setConfirmDialogOpen(false);
+  };
+
+  const handleCancelQuit = () => {
+    setConfirmDialogOpen(false);
   };
 
   return (
@@ -70,12 +90,30 @@ function MenuAccount() {
                 </Button>
               </Grid>
               <Grid item>
-                <Button style={{ color: "black", zIndex: 1 }}>Sair</Button>
+                <Button
+                  style={{ color: "black", zIndex: 1 }}
+                  onClick={handleQuit}
+                >
+                  Sair
+                </Button>
               </Grid>
             </Grid>
           </Toolbar>
         </AppBar>
       </CardContent>
+      <Dialog open={confirmDialogOpen} onClose={handleCancelQuit}>
+        <DialogTitle>Você deseja realmente sair do sistema?</DialogTitle>
+        <DialogContent>
+          <Typography variant="body1">
+            Ao sair do sistema, você perderá todos os dados não salvos. Tem
+            certeza de que deseja sair?
+          </Typography>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCancelQuit}>Não</Button>
+          <Button onClick={handleConfirmQuit}>Sim</Button>
+        </DialogActions>
+      </Dialog>
     </Card>
   );
 }
