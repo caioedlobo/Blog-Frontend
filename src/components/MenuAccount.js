@@ -47,6 +47,7 @@ function MenuAccount() {
   const handleCancelQuit = () => {
     setConfirmDialogOpen(false);
   };
+  const handleChangeName = () => {};
 
   return (
     <Card
@@ -79,7 +80,10 @@ function MenuAccount() {
               }}
             >
               <Grid item>
-                <Button style={{ color: "black", zIndex: 1 }}>
+                <Button
+                  style={{ color: "black", zIndex: 1 }}
+                  onClick={handleChangeName}
+                >
                   Alterar nome
                 </Button>
               </Grid>
