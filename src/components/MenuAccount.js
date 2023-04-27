@@ -18,8 +18,10 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function MenuAccount() {
+  const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = useState(null);
   const [confirmDialogOpen, setConfirmDialogOpen] = useState(false);
 
@@ -36,8 +38,8 @@ function MenuAccount() {
   };
 
   const handleConfirmQuit = () => {
-    // Implementar a lógica de logout aqui
     localStorage.removeItem("token");
+    navigate("/login");
 
     setConfirmDialogOpen(false);
   };
