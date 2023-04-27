@@ -65,119 +65,122 @@ const Account = (props) => {
           handleChangeStatePosts={() => setMenuState("3")}
         />
 
-        <Card
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            padding: "20px",
-            width: "525px",
-            maxWidth: "525px",
-            marginTop: "20px",
-          }}
-          elevation={3}
-        >
-          <CardContent>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                width: "360px",
-                maxWidth: "360px",
-                alignItems: "center",
-              }}
-            >
-              <Typography variant="h6" style={{ marginBottom: "20px" }}>
-                Digite o nome que deseja alterar
-              </Typography>
-              <TextField
-                label="Primeiro nome"
-                variant="outlined"
-                value={firstName}
-                onChange={(e) => setFirstName(e.target.value)}
+        {menuState === "1" ? (
+          <Card
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              padding: "20px",
+              width: "525px",
+              maxWidth: "525px",
+              marginTop: "20px",
+            }}
+            elevation={3}
+          >
+            <CardContent>
+              <div
                 style={{
-                  marginBottom: "20px",
-                  width: "350px",
-                  maxWidth: "350px",
+                  display: "flex",
+                  flexDirection: "column",
+                  width: "360px",
+                  maxWidth: "360px",
+                  alignItems: "center",
                 }}
-              />
-              <TextField
-                label="Último nome"
-                variant="outlined"
-                value={lastName}
-                onChange={(e) => setLastName(e.target.value)}
-                style={{
-                  marginBottom: "20px",
-                  width: "350px",
-                  maxWidth: "350px",
-                }}
-              />
-              <Button
-                variant="contained"
-                color="primary"
-                style={{ width: "200px" }}
               >
-                Salvar
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
-
-        {posts.map((post) => (
-          <CardFeed
-            key={post.id}
-            title={post.title}
-            text={post.body}
-            name={post.account.firstName + " " + post.account.lastName}
-            date={post.createdAt}
-          />
-        ))}
-        <Card
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            padding: "20px",
-            width: "525px",
-            maxWidth: "525px",
-            marginTop: "20px",
-          }}
-          elevation={3}
-        >
-          <CardContent>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                width: "360px",
-                maxWidth: "360px",
-                alignItems: "center",
-              }}
-            >
-              <Typography variant="h6" style={{ marginBottom: "20px" }}>
-                Digite sua nova senha
-              </Typography>
-              <TextField
-                label="Nova senha"
-                variant="outlined"
-                value={newPassword}
-                onChange={(e) => setNewPassword(e.target.value)}
+                <Typography variant="h6" style={{ marginBottom: "20px" }}>
+                  Digite o nome que deseja alterar
+                </Typography>
+                <TextField
+                  label="Primeiro nome"
+                  variant="outlined"
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
+                  style={{
+                    marginBottom: "20px",
+                    width: "350px",
+                    maxWidth: "350px",
+                  }}
+                />
+                <TextField
+                  label="Último nome"
+                  variant="outlined"
+                  value={lastName}
+                  onChange={(e) => setLastName(e.target.value)}
+                  style={{
+                    marginBottom: "20px",
+                    width: "350px",
+                    maxWidth: "350px",
+                  }}
+                />
+                <Button
+                  variant="contained"
+                  color="primary"
+                  style={{ width: "200px" }}
+                >
+                  Salvar
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        ) : menuState === "2" ? (
+          <Card
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              padding: "20px",
+              width: "525px",
+              maxWidth: "525px",
+              marginTop: "20px",
+            }}
+            elevation={3}
+          >
+            <CardContent>
+              <div
                 style={{
-                  marginBottom: "20px",
-                  width: "350px",
-                  maxWidth: "350px",
+                  display: "flex",
+                  flexDirection: "column",
+                  width: "360px",
+                  maxWidth: "360px",
+                  alignItems: "center",
                 }}
-              />
-              <Button
-                variant="contained"
-                color="primary"
-                style={{ width: "200px" }}
               >
-                Salvar
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
+                <Typography variant="h6">Digite sua nova senha</Typography>
+                <TextField
+                  label="Nova senha"
+                  variant="outlined"
+                  value={newPassword}
+                  onChange={(e) => setNewPassword(e.target.value)}
+                  style={{
+                    marginBottom: "20px",
+                    width: "350px",
+                    maxWidth: "350px",
+                  }}
+                />
+                <Button
+                  variant="contained"
+                  color="primary"
+                  style={{ width: "200px" }}
+                >
+                  Salvar
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        ) : (
+          <div style={{ width: "100%" }}>
+            {posts.map((post) => (
+              <CardFeed
+                key={post.id}
+                title={post.title}
+                text={post.body}
+                name={post.account.firstName + " " + post.account.lastName}
+                date={post.createdAt}
+              />
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
