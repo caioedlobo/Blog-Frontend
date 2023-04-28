@@ -4,9 +4,11 @@ import CardFeed from "../CardFeed";
 import MenuAccount from "../MenuAccount";
 import axios from "axios";
 import {
+  Alert,
   Button,
   Card,
   CardContent,
+  Snackbar,
   TextField,
   Typography,
 } from "@mui/material";
@@ -17,8 +19,12 @@ const Account = (props) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [newPassword, setNewPassword] = useState("");
-  const [menuState, setMenuState] = useState("3");
-  console.log(menuState);
+  const [menuState, setMenuState] = useState("");
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [message, setMessage] = useState("teste");
+  const [status, setStatus] = useState("success");
+  console.log(firstName);
+  console.log(lastName);
 
   useEffect(() => {
     axios
@@ -46,8 +52,82 @@ const Account = (props) => {
       });
   }, [accountId]);
 
+  const submitChangeName = () => {
+    axios
+      .put(
+        `${process.env.REACT_APP_API_URL}/accounts/update-name`,
+        {
+          firstName: firstName,
+          lastName: lastName,
+        },
+        {
+          headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+        }
+      )
+      .then((response) => {
+        setStatus("success");
+        setMessage("Acão realizada com sucesso!");
+        setOpenSnackbar(true);
+        console.log(response.data);
+      })
+      .catch((errors) => {
+        setStatus("error");
+        if (errors.response.status === "400") {
+          setMessage("Erro: " + errors.response.data.errors.join(", "));
+        }
+        setMessage(
+          "Erro: Verifique se está logado ou tente novamente mais tarde."
+        );
+        setOpenSnackbar(true);
+        console.log(errors);
+      });
+  };
+
+  const submitChangePassword = () => {
+    axios
+      .put(
+        `${process.env.REACT_APP_API_URL}/accounts/update-password`,
+        {
+          email: "",
+          password: newPassword,
+        },
+        {
+          headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+        }
+      )
+      .then((response) => {
+        setStatus("success");
+        setMessage("Acão realizada com sucesso!");
+        setOpenSnackbar(true);
+        console.log(response.data);
+      })
+      .catch((errors) => {
+        setStatus("error");
+        //setMessage("Erro ao realizar acão: " + errors.response.data.errors);
+
+        if (errors.response.status === "400") {
+          setMessage("Erro: " + errors.response.data.errors.join(", "));
+        }
+        setMessage(
+          "Erro: Verifique se está logado ou tente novamente mais tarde."
+        );
+        setOpenSnackbar(true);
+        console.log(errors);
+      });
+  };
+
   return (
     <div>
+      <Snackbar
+        open={openSnackbar}
+        autoHideDuration={6000}
+        onClose={() => setOpenSnackbar(false)}
+        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+      >
+        <Alert severity={status} sx={{ width: "100%" }}>
+          {message}
+        </Alert>
+      </Snackbar>
       <Navbar />
 
       <div
@@ -117,6 +197,7 @@ const Account = (props) => {
                   variant="contained"
                   color="primary"
                   style={{ width: "200px" }}
+                  onClick={submitChangeName}
                 >
                   Salvar
                 </Button>
@@ -146,7 +227,9 @@ const Account = (props) => {
                   alignItems: "center",
                 }}
               >
-                <Typography variant="h6">Digite sua nova senha</Typography>
+                <Typography variant="h6" style={{ marginBottom: "20px" }}>
+                  Digite sua nova senha
+                </Typography>
                 <TextField
                   label="Nova senha"
                   variant="outlined"
@@ -162,6 +245,7 @@ const Account = (props) => {
                   variant="contained"
                   color="primary"
                   style={{ width: "200px" }}
+                  onClick={submitChangePassword}
                 >
                   Salvar
                 </Button>

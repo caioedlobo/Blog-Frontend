@@ -5,18 +5,14 @@ import Typography from "@mui/material/Typography";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Alert from "@mui/material/Alert";
-import AlertTitle from "@mui/material/AlertTitle";
 import Snackbar from "@mui/material/Snackbar";
 import RegistrationForm from "./RegistrationForm";
 
 function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
   const [showForgotPassword, setShowForgotPassword] = useState(false);
   const [showRegistrationForm, setShowRegistrationForm] = useState(false);
-  const [showSuccessAlert, setShowSuccessAlert] = useState(true);
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [message, setMessage] = useState("teste");
   const [status, setStatus] = useState("success");
