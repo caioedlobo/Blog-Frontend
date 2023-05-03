@@ -54,7 +54,7 @@ function LoginForm() {
   const handleForgotPasswordSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post(
+      const response = await axios.put(
         `${process.env.REACT_APP_API_URL}/forgot-password`,
         {
           email: email,

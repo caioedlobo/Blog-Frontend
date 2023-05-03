@@ -21,7 +21,7 @@ const Account = (props) => {
   const [newPassword, setNewPassword] = useState("");
   const [menuState, setMenuState] = useState("");
   const [openSnackbar, setOpenSnackbar] = useState(false);
-  const [message, setMessage] = useState("teste");
+  const [message, setMessage] = useState("");
   const [status, setStatus] = useState("success");
   console.log(firstName);
   console.log(lastName);
@@ -72,12 +72,16 @@ const Account = (props) => {
       })
       .catch((errors) => {
         setStatus("error");
-        if (errors.response.status === "400") {
+        console.log(typeof errors.response.status)
+        if (errors.response.status === 400) {
+          console.log(errors.response.data.errors.join(", "));
           setMessage("Erro: " + errors.response.data.errors.join(", "));
         }
-        setMessage(
-          "Erro: Verifique se está logado ou tente novamente mais tarde."
-        );
+        else{
+          setMessage(
+            "Erro: Verifique se está logado ou tente novamente mais tarde."
+          );
+        } 
         setOpenSnackbar(true);
         console.log(errors);
       });
