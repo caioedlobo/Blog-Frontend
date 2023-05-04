@@ -23,8 +23,6 @@ const Account = (props) => {
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [message, setMessage] = useState("");
   const [status, setStatus] = useState("success");
-  console.log(firstName);
-  console.log(lastName);
 
   useEffect(() => {
     axios
@@ -92,8 +90,7 @@ const Account = (props) => {
       .put(
         `${process.env.REACT_APP_API_URL}/accounts/update-password`,
         {
-          email: "",
-          password: newPassword,
+          password: newPassword
         },
         {
           headers: { Authorization: "Bearer " + localStorage.getItem("token") },
@@ -109,12 +106,14 @@ const Account = (props) => {
         setStatus("error");
         //setMessage("Erro ao realizar acão: " + errors.response.data.errors);
 
-        if (errors.response.status === "400") {
+        if (errors.response.status === 400) {
           setMessage("Erro: " + errors.response.data.errors.join(", "));
         }
-        setMessage(
-          "Erro: Verifique se está logado ou tente novamente mais tarde."
-        );
+        else{
+          setMessage(
+            "Erro: Verifique se está logado ou tente novamente mais tarde."
+          );
+        }
         setOpenSnackbar(true);
         console.log(errors);
       });
