@@ -13,11 +13,13 @@ const RegistrationForm = (props) => {
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [message, setMessage] = useState("");
   const [status, setStatus] = useState("success");
+  const [isEnabled, setIsEnabled] = useState(true);
 
   const navigate = useNavigate();
 
   const handleRegistrationSubmit = async (event) => {
     event.preventDefault();
+    setIsEnabled(false);
     setStatus("info");
     setMessage("Realizando o cadastro...");
     setOpenSnackbar(true);
@@ -31,14 +33,15 @@ const RegistrationForm = (props) => {
           password: password,
         }
       )
+      setIsEnabled(true);
       setStatus("success");
       setMessage("Cadastro realizado com sucesso");
       setOpenSnackbar(true);
       console.log(response);
       localStorage.setItem("token", response.data.token);
-
       navigate("/feed");
     } catch (error) {
+      setIsEnabled(true);
       setStatus("error");
       setMessage("Erro ao realizar cadastro");
       setOpenSnackbar(true);
@@ -124,6 +127,7 @@ const RegistrationForm = (props) => {
         color="primary"
         fullWidth
         style={{ marginTop: "20px", zIndex: 1 }}
+        disabled={!isEnabled}
       >
         Cadastrar
       </Button>
