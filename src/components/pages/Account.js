@@ -238,6 +238,7 @@ const Account = (props) => {
                   variant="outlined"
                   value={newPassword}
                   onChange={(e) => setNewPassword(e.target.value)}
+                  type="password"
                   style={{
                     marginBottom: "20px",
                     width: "350px",
