@@ -14,7 +14,7 @@ function LoginForm() {
   const [showForgotPassword, setShowForgotPassword] = useState(false);
   const [showRegistrationForm, setShowRegistrationForm] = useState(false);
   const [openSnackbar, setOpenSnackbar] = useState(false);
-  const [message, setMessage] = useState("teste");
+  const [message, setMessage] = useState("");
   const [status, setStatus] = useState("success");
 
   const navigate = useNavigate();

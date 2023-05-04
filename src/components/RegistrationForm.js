@@ -3,17 +3,24 @@ import axios from "axios";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
+import { Alert, Snackbar } from "@mui/material";
 
 const RegistrationForm = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [message, setMessage] = useState("");
+  const [status, setStatus] = useState("success");
 
   const navigate = useNavigate();
 
   const handleRegistrationSubmit = async (event) => {
     event.preventDefault();
+    setStatus("info");
+    setMessage("Realizando o cadastro...");
+    setOpenSnackbar(true);
     try {
       const response = await axios.post(
         `${process.env.REACT_APP_API_URL}/auth/register`,
@@ -23,12 +30,18 @@ const RegistrationForm = (props) => {
           email: email,
           password: password,
         }
-      );
+      )
+      setStatus("success");
+      setMessage("Cadastro realizado com sucesso");
+      setOpenSnackbar(true);
       console.log(response);
       localStorage.setItem("token", response.data.token);
 
       navigate("/feed");
     } catch (error) {
+      setStatus("error");
+      setMessage("Erro ao realizar cadastro");
+      setOpenSnackbar(true);
       console.error(error);
     }
   };
@@ -53,6 +66,16 @@ const RegistrationForm = (props) => {
       }}
       onSubmit={handleRegistrationSubmit}
     >
+      <Snackbar
+        open={openSnackbar}
+        autoHideDuration={6000}
+        onClose={() => setOpenSnackbar(false)}
+        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+      >
+        <Alert severity={status} sx={{ width: "100%" }}>
+          {message}
+        </Alert>
+      </Snackbar>
       <TextField
         id="name"
         label="Primeiro nome"
