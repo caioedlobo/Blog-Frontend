@@ -1,18 +1,36 @@
 import React, { useState } from 'react'
 import Navbar from '../Navbar'
 import { Button, TextField, Typography } from '@mui/material';
+import { useParams } from 'react-router-dom';
+
+import axios from 'axios';
 
 const ForgotPassword = () => {
     const [password, setPassword] = useState("")
-    const handleSubmit = () => {
-    console.log("teste")
+    const { token } = useParams();
+    console.log(token)
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        try {
+          const response = await axios.put(
+            `${process.env.REACT_APP_API_URL}/forgot-password/${token}`,
+            {
+              password: password,
+            }
+          );
+          console.log(response);
+        } catch (error) {
+          console.error(error);
+        }
+        
     }
 
     const handleChangeText = (event) => {
-        setPassword(event.target.value)
+        setPassword(event.target.value);
     }
 
-    console.log(password)
+
 
     return (
       <div       style={{
@@ -47,7 +65,7 @@ const ForgotPassword = () => {
             margin="normal"
             type='password'
           />
-          <Button type="submit" variant="contained" color="primary" style={{margin: "10px"}} disabled={password.length > 0 ? false : true}>
+          <Button type="submit" variant="contained" color="primary" style={{margin: "10px"}} disabled={password.length > 0 ? false : true} onClick={handleSubmit}>
             Salvar
           </Button>
         </form>
