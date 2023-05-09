@@ -25,7 +25,7 @@ const Feed = () => {
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [messages, setMessages] = useState([]);
   const [status, setStatus] = useState("success");
-  console.log(filteredPosts);
+
   useEffect(() => {
     const fetchPosts = async () => {
       try {
