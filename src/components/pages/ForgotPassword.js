@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Navbar from '../Navbar'
-import { Button, TextField, Typography } from '@mui/material';
+import { Alert, Button, Snackbar, TextField, Typography } from '@mui/material';
 import { useParams } from 'react-router-dom';
 
 import axios from 'axios';
@@ -8,7 +8,10 @@ import axios from 'axios';
 const ForgotPassword = () => {
     const [password, setPassword] = useState("")
     const { token } = useParams();
-    console.log(token)
+    const [openSnackbar, setOpenSnackbar] = useState(false);
+    const [messages, setMessages] = useState([]);
+    const [status, setStatus] = useState("success");
+
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -20,8 +23,14 @@ const ForgotPassword = () => {
             }
           );
           console.log(response);
+          setStatus("success");
+          setMessages("Senha alterada com sucesso!")
+          setOpenSnackbar(true);
         } catch (error) {
           console.error(error);
+          setStatus("error");
+          setMessages("Ocorreu um erro ao alterar a senha.")
+          setOpenSnackbar(true);
         }
         
     }
@@ -38,7 +47,17 @@ const ForgotPassword = () => {
         flexDirection: "column",
         alignItems: "center",
 
-      }}> 
+      }}>
+              <Snackbar
+        open={openSnackbar}
+        autoHideDuration={6000}
+        onClose={() => setOpenSnackbar(false)}
+        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+      >
+        <Alert severity={status} sx={{ width: "100%" }}>
+          {messages}
+        </Alert>
+      </Snackbar>
         <Navbar />
         <form style={{
                     display: "flex",
