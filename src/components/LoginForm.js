@@ -13,6 +13,7 @@ function LoginForm() {
   const [password, setPassword] = useState("");
   const [showForgotPassword, setShowForgotPassword] = useState(false);
   const [showRegistrationForm, setShowRegistrationForm] = useState(false);
+  const [disableSendButton, setDisableSendButton] = useState(false)
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [message, setMessage] = useState("");
   const [status, setStatus] = useState("success");
@@ -53,6 +54,7 @@ function LoginForm() {
 
   const handleForgotPasswordSubmit = async (event) => {
     event.preventDefault();
+    setDisableSendButton(true);
     setStatus("info");
     setMessage("Aguarde, enviando email...")
     setOpenSnackbar(true);
@@ -63,16 +65,16 @@ function LoginForm() {
           email: email,
         }
       );
-      console.log(response);
+
       setStatus("success")
       setMessage(response.data);
       setOpenSnackbar(true);
     } catch (error) {
       setStatus("error");
       setMessage(error.response.data.errors);
-      console.error("Erro:" + error.response.data.errors);
       setOpenSnackbar(true);
     }
+    setDisableSendButton(false)
   };
 
 
@@ -156,6 +158,7 @@ function LoginForm() {
                 fullWidth
                 style={{ zIndex: 1 }}
                 onClick={handleForgotPasswordSubmit}
+                disabled={disableSendButton}
               >
                 Enviar
               </Button>
