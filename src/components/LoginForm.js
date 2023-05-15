@@ -53,6 +53,9 @@ function LoginForm() {
 
   const handleForgotPasswordSubmit = async (event) => {
     event.preventDefault();
+    setStatus("info");
+    setMessage("Aguarde, enviando email...")
+    setOpenSnackbar(true);
     try {
       const response = await axios.post(
         `${process.env.REACT_APP_API_URL}/forgot-password`,
@@ -61,11 +64,17 @@ function LoginForm() {
         }
       );
       console.log(response);
+      setStatus("success")
+      setMessage(response.data);
+      setOpenSnackbar(true);
     } catch (error) {
-      console.error(error);
+      setStatus("error");
+      setMessage(error.response.data.errors);
+      console.error("Erro:" + error.response.data.errors);
+      setOpenSnackbar(true);
     }
   };
-  console.log(openSnackbar);
+
 
   return (
     <div
