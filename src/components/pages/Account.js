@@ -14,8 +14,8 @@ import {
 } from "@mui/material";
 
 const Account = (props) => {
-  const [posts, setPosts] = useState([]);
-  const [accountId, setAccountId] = useState();
+  const [posts, setPosts] = useState({});
+  const [accountId, setAccountId] = useState("1");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [newPassword, setNewPassword] = useState("");
@@ -23,7 +23,8 @@ const Account = (props) => {
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [message, setMessage] = useState("");
   const [status, setStatus] = useState("success");
-  console.log(accountId);
+  
+ 
   useEffect(() => {
     axios
       .get(`${process.env.REACT_APP_API_URL}/accounts/account-id`, {
@@ -48,7 +49,10 @@ const Account = (props) => {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [accountId]);
+
+  //console.log(posts.content);
+  //console.log(posts.content.map((post) => (post.title)));
 
   const submitChangeName = () => {
     axios
@@ -256,19 +260,22 @@ const Account = (props) => {
               </div>
             </CardContent>
           </Card>
-        ) : (
-          <div style={{ width: "100%" }}>
-            {posts.map((post) => (
-              <CardFeed
-                key={post.id}
-                title={post.title}
-                text={post.body}
-                name={post.account.firstName + " " + post.account.lastName}
-                date={post.createdAt}
-              />
-            ))}
-          </div>
-        )}
+        ) :
+          //null
+          (posts.content !== undefined ? (
+            <div style={{ width: "100%" }}>
+              {posts.content.map((post) => (
+                <CardFeed
+                  key={post.id}
+                  title={post.title}
+                  text={post.body}
+                  name={post.account.firstName + " " + post.account.lastName}
+                  date={post.createdAt}
+                />
+              ))}
+            </div>
+          ) : null)}
+          
       </div>
     </div>
   );

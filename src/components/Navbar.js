@@ -23,7 +23,7 @@ function Navbar() {
         setIsLoggedIn(false);
         console.error("Error fetching data: ", error);
       });
-  }, [isLoggedIn]);
+  }, []);
 
   return (
     <div style={{ flexGrow: "1", marginBottom: "30px" }}>
