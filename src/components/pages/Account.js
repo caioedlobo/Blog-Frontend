@@ -23,7 +23,7 @@ const Account = (props) => {
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [message, setMessage] = useState("");
   const [status, setStatus] = useState("success");
-
+  console.log(accountId);
   useEffect(() => {
     axios
       .get(`${process.env.REACT_APP_API_URL}/accounts/account-id`, {
@@ -48,7 +48,7 @@ const Account = (props) => {
       .catch((error) => {
         console.log(error);
       });
-  }, [accountId]);
+  }, []);
 
   const submitChangeName = () => {
     axios
