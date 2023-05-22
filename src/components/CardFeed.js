@@ -12,7 +12,6 @@ import {
   DialogActions,
 } from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
-import axios from "axios";
 
 function CardFeed(props) {
   const { title, text, name, date, isAuthor, searchQuery } = props;

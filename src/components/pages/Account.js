@@ -15,7 +15,7 @@ import {
 
 const Account = (props) => {
   const [posts, setPosts] = useState({});
-  const [accountId, setAccountId] = useState("1");
+  const [accountId, setAccountId] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [newPassword, setNewPassword] = useState("");
@@ -271,6 +271,8 @@ const Account = (props) => {
                   text={post.body}
                   name={post.account.firstName + " " + post.account.lastName}
                   date={post.createdAt}
+                  isAuthor={true}
+                
                 />
               ))}
             </div>
