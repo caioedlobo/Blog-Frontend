@@ -136,6 +136,7 @@ const Feed = () => {
       {filteredPosts.map((post, index) => (
         <CardFeed
           key={index}
+          id={post.id}
           title={post.title}
           text={post.body}
           name={post.account.firstName + " " + post.account.lastName}

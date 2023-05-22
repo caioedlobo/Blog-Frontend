@@ -12,9 +12,10 @@ import {
   DialogActions,
 } from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
+import axios from "axios";
 
 function CardFeed(props) {
-  const { title, text, name, date, isAuthor, searchQuery } = props;
+  const { id, title, text, name, date, isAuthor, searchQuery } = props;
 
   const [showFullText, setShowFullText] = useState(false);
 
@@ -38,6 +39,15 @@ function CardFeed(props) {
 
   const handleConfirmExclude = () => {
     //TODO: axios
+    axios.delete(`${process.env.REACT_APP_API_URL}/posts/${id}`, {
+      headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+    })
+    .then((response) => {
+      console.log(response);
+    })
+    .catch((error) => {
+      console.log(error);
+    })
 
     setConfirmDialogOpen(false);
   };
