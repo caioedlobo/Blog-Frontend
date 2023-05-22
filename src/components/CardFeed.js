@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Card,
   Button,
@@ -12,14 +12,16 @@ import {
   DialogActions,
 } from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
+import axios from "axios";
 
 function CardFeed(props) {
-  const { title, text, name, date, searchQuery } = props;
+  const { title, text, name, date, isAuthor, searchQuery } = props;
 
   const [showFullText, setShowFullText] = useState(false);
 
   const filteredDate = formatarData(date);
   const [confirmDialogOpen, setConfirmDialogOpen] = useState(false);
+
 
   function formatarData(dateString) {
     const date = new Date(dateString);
@@ -123,9 +125,11 @@ function CardFeed(props) {
               <Typography color="textSecondary" variant="body2" component="p">
                 {filteredDate + " ● " + name}
               </Typography>
-              <Button onClick={handleExclude}>
+              { isAuthor ? <Button onClick={handleExclude}>
               <DeleteIcon sx={{ color: 'red' }} />
               </Button>
+: <></>}
+
               
             </Box>
           </Box>

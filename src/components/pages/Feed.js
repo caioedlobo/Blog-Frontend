@@ -25,6 +25,7 @@ const Feed = () => {
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [messages, setMessages] = useState([]);
   const [status, setStatus] = useState("success");
+  const [accountIdLoggedIn, setAccountIdLoggedIn] = useState();
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -40,6 +41,28 @@ const Feed = () => {
 
     fetchPosts();
   }, [searchQuery]);
+
+  useEffect(() => {
+    const fetchAccountId = async () => {
+      try {
+        const response = await axios.get(
+          `${process.env.REACT_APP_API_URL}/accounts/account-id`,
+          {
+            headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+          }
+        );
+        console.log(response);
+        setAccountIdLoggedIn(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+  
+    fetchAccountId();
+  }, []);
+
+
+
 
   const handleSearchQueryChange = (event) => {
     const query = event.target.value.toLowerCase();
@@ -118,6 +141,7 @@ const Feed = () => {
           text={post.body}
           name={post.account.firstName + " " + post.account.lastName}
           date={post.createdAt}
+          isAuthor={post.account.id === accountIdLoggedIn ? true : false }
         />
       ))}
 
