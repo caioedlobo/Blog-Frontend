@@ -6,7 +6,12 @@ import {
   Typography,
   Box,
   Container,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
 } from "@mui/material";
+import DeleteIcon from '@mui/icons-material/Delete';
 
 function CardFeed(props) {
   const { title, text, name, date, searchQuery } = props;
@@ -14,6 +19,7 @@ function CardFeed(props) {
   const [showFullText, setShowFullText] = useState(false);
 
   const filteredDate = formatarData(date);
+  const [confirmDialogOpen, setConfirmDialogOpen] = useState(false);
 
   function formatarData(dateString) {
     const date = new Date(dateString);
@@ -25,8 +31,21 @@ function CardFeed(props) {
     return `${hora}:${minutos} - ${dia}/${mes}/${ano}`;
   }
 
+  const handleExclude = () => {
+    setConfirmDialogOpen(true);
+  };
+
+  const handleConfirmExclude = () => {
+    //TODO: axios
+
+    setConfirmDialogOpen(false);
+  };
   const handleShowFullText = () => {
     setShowFullText(!showFullText);
+  };
+
+  const handleCancelExclude = () => {
+    setConfirmDialogOpen(false);
   };
 
   const maxSizeText = 200;
@@ -99,13 +118,30 @@ function CardFeed(props) {
                 </Button>
               )}
             </Box>
-            <Box textAlign={"right"}>
+            <Box textAlign={"right"} sx={{display: "flex", justifyContent: "space-between", alignItems: "center"}}>
+            
               <Typography color="textSecondary" variant="body2" component="p">
                 {filteredDate + " ● " + name}
               </Typography>
+              <Button onClick={handleExclude}>
+              <DeleteIcon sx={{ color: 'red' }} />
+              </Button>
+              
             </Box>
           </Box>
         </CardContent>
+        <Dialog open={confirmDialogOpen} onClose={handleCancelExclude}>
+        <DialogTitle>Você deseja realmente excluir o post?</DialogTitle>
+        <DialogContent>
+          <Typography variant="body1">
+            Ao excluir o post ele será removido do banco de dados permanentemente.
+          </Typography>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCancelExclude}>Não</Button>
+          <Button onClick={handleConfirmExclude}>Sim</Button>
+        </DialogActions>
+      </Dialog>
       </Card>
     </Container>
   );
