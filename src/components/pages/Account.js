@@ -266,6 +266,7 @@ const Account = (props) => {
             <div style={{ width: "100%" }}>
               {posts.content.map((post) => (
                 <CardFeed
+                id={post.id}
                   key={post.id}
                   title={post.title}
                   text={post.body}

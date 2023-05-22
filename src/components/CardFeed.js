@@ -28,8 +28,6 @@ function CardFeed(props) {
   const [message, setMessage] = useState("");
   const [status, setStatus] = useState("success");
 
-  const navigate = useNavigate();
-
   function formatarData(dateString) {
     const date = new Date(dateString);
     const hora = date.getHours().toString().padStart(2, "0");
