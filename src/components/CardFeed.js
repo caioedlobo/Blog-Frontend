@@ -10,9 +10,12 @@ import {
   DialogTitle,
   DialogContent,
   DialogActions,
+  Snackbar,
+  Alert,
 } from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function CardFeed(props) {
   const { id, title, text, name, date, isAuthor, searchQuery } = props;
@@ -21,7 +24,11 @@ function CardFeed(props) {
 
   const filteredDate = formatarData(date);
   const [confirmDialogOpen, setConfirmDialogOpen] = useState(false);
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [message, setMessage] = useState("");
+  const [status, setStatus] = useState("success");
 
+  const navigate = useNavigate();
 
   function formatarData(dateString) {
     const date = new Date(dateString);
@@ -33,20 +40,36 @@ function CardFeed(props) {
     return `${hora}:${minutos} - ${dia}/${mes}/${ano}`;
   }
 
+  const excludeSuccess = () => {
+    
+    setStatus("success");
+    setMessage("Post excluído com sucesso!")
+    setOpenSnackbar(true);
+  }
+
+  const excludeError = (error) => {
+    setStatus("error");
+    setMessage("Erro ao deletar post. Logue novamente na sua conta ou tente mais tarde.");
+    setOpenSnackbar(true);
+  }
+  
+
   const handleExclude = () => {
     setConfirmDialogOpen(true);
   };
 
   const handleConfirmExclude = () => {
-    //TODO: axios
     axios.delete(`${process.env.REACT_APP_API_URL}/posts/${id}`, {
       headers: { Authorization: "Bearer " + localStorage.getItem("token") },
     })
     .then((response) => {
       console.log(response);
+      window.location.reload();
+      excludeSuccess();
     })
     .catch((error) => {
       console.log(error);
+      excludeError(error);
     })
 
     setConfirmDialogOpen(false);
@@ -79,6 +102,16 @@ function CardFeed(props) {
         marginBottom: "20px",
       }}
     >
+      <Snackbar
+        open={openSnackbar}
+        autoHideDuration={6000}
+        onClose={() => setOpenSnackbar(false)}
+        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+      >
+        <Alert severity={status} sx={{ width: "100%" }}>
+          {message}
+        </Alert>
+      </Snackbar>
       <Card
         elevation={6}
         style={{

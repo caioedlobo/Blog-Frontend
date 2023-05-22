@@ -74,7 +74,7 @@ function LoginForm() {
       setMessage(error.response.data.errors);
       setOpenSnackbar(true);
     }
-    setDisableSendButton(false)
+    setDisableSendButton(false);
   };
 
 
