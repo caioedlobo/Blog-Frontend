@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom';
 
 import axios from 'axios';
 
-const ForgotPassword = () => {
+const ForgotPassword = (props) => {
     const [password, setPassword] = useState("")
     const { token } = useParams();
     const [openSnackbar, setOpenSnackbar] = useState(false);
@@ -58,7 +58,7 @@ const ForgotPassword = () => {
           {messages}
         </Alert>
       </Snackbar>
-        <Navbar />
+        <Navbar isLoggedIn={props.isLoggedIn}/>
         <form style={{
                     display: "flex",
                     flexDirection: "column",

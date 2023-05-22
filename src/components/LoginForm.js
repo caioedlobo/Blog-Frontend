@@ -8,7 +8,7 @@ import Alert from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
 import RegistrationForm from "./RegistrationForm";
 
-function LoginForm() {
+function LoginForm(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showForgotPassword, setShowForgotPassword] = useState(false);
@@ -19,6 +19,10 @@ function LoginForm() {
   const [status, setStatus] = useState("success");
 
   const navigate = useNavigate();
+  const updateNavbar = () => {
+    props.updateIsLoggedIn(true);
+    window.location.reload();
+  }
 
   const handleCloseRegistrationForm = () => {
     setShowRegistrationForm(false);
@@ -42,13 +46,15 @@ function LoginForm() {
           setStatus("success");
           setOpenSnackbar(true);
           navigate("/feed");
+          //window.location.reload();
+          updateNavbar();
           console.log(res);
         });
     } catch (error) {
-      setMessage("Erro ao autenticar: " + error.response.data.errors);
-      setStatus("error");
-      setOpenSnackbar(true);
-      console.error(error);
+        setMessage("Erro ao autenticar: " + error.response.data.errors);
+        setStatus("error");
+        setOpenSnackbar(true);
+        console.error(error);
     }
   };
 

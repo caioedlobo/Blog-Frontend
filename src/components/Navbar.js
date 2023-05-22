@@ -6,24 +6,10 @@ import { Button } from "@mui/material";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
-function Navbar() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  useEffect(() => {
-    axios
-      .get(`${process.env.REACT_APP_API_URL}/auth/is-authenticated`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      })
-      .then((response) => {
-        setIsLoggedIn(true);
-      })
-      .catch((error) => {
-        setIsLoggedIn(false);
-        console.error("Error fetching data: ", error);
-      });
-  }, []);
+function Navbar(props) {
+  //const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const {isLoggedIn} = props;
+  console.log(isLoggedIn);
 
   return (
     <div style={{ flexGrow: "1", marginBottom: "30px" }}>

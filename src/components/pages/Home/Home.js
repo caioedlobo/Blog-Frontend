@@ -1,14 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import LoginForm from "../../LoginForm";
 import Navbar from "../../Navbar";
 import "./Home.css";
 
-const Home = () => {
+const Home = (props) => {
+  const [data, setData] = useState(props.isLoggedIn);
+
+  const handleData = (value) => {
+    setData(value);
+    console.log(value);
+  };
+
   return (
     <div>
       <ul className="background">
-        <Navbar />
-        <LoginForm />
+        <Navbar isLoggedIn={data} />
+        <LoginForm updateIsLoggedIn={handleData} />
         <li></li>
         <li></li>
         <li></li>

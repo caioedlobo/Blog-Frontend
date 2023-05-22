@@ -14,7 +14,7 @@ import axios from "axios";
 import Alert from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
 
-const Feed = () => {
+const Feed = (props) => {
   // eslint-disable-next-line
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredPosts, setFilteredPosts] = useState([]);
@@ -50,7 +50,6 @@ const Feed = () => {
             headers: { Authorization: "Bearer " + localStorage.getItem("token") },
           }
         );
-        console.log(response);
         setAccountIdLoggedIn(response.data);
       } catch (error) {
         console.error(error);
@@ -130,7 +129,7 @@ const Feed = () => {
           {messages}
         </Alert>
       </Snackbar>
-      <Navbar />
+      <Navbar isLoggedIn={props.isLoggedIn}/>
       <SearchBar onSearchQueryChange={handleSearchQueryChange} />
 
       {filteredPosts.map((post, index) => (

@@ -2,7 +2,7 @@ import { Typography } from "@mui/material";
 import React from "react";
 import Navbar from "../Navbar";
 
-const About = () => {
+const About = (props) => {
   return (
     <div
       style={{
@@ -11,7 +11,7 @@ const About = () => {
         alignItems: "center",
       }}
     >
-      <Navbar />
+      <Navbar isLoggedIn={props.isLoggedIn}/>
       <Typography
         variant="h4"
         component="h3"

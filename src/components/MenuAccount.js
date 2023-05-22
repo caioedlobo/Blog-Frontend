@@ -20,11 +20,13 @@ function MenuAccount(props) {
 
   const handleQuit = () => {
     setConfirmDialogOpen(true);
+    
   };
 
   const handleConfirmQuit = () => {
     localStorage.removeItem("token");
     navigate("/login");
+    window.location.reload();
 
     setConfirmDialogOpen(false);
   };

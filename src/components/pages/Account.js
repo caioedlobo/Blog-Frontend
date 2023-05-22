@@ -51,9 +51,6 @@ const Account = (props) => {
       });
   }, [accountId]);
 
-  //console.log(posts.content);
-  //console.log(posts.content.map((post) => (post.title)));
-
   const submitChangeName = () => {
     axios
       .put(
@@ -135,7 +132,7 @@ const Account = (props) => {
           {message}
         </Alert>
       </Snackbar>
-      <Navbar />
+      <Navbar isLoggedIn={props.isLoggedIn}/>
 
       <div
         style={{
@@ -266,7 +263,7 @@ const Account = (props) => {
             <div style={{ width: "100%" }}>
               {posts.content.map((post) => (
                 <CardFeed
-                id={post.id}
+                  id={post.id}
                   key={post.id}
                   title={post.title}
                   text={post.body}
