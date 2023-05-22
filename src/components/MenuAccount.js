@@ -1,13 +1,8 @@
 import {
-  Menu,
-  MenuItem,
   Button,
   Card,
   CardContent,
   Typography,
-  List,
-  ListItem,
-  ListItemText,
   AppBar,
   Toolbar,
   Grid,
@@ -17,21 +12,11 @@ import {
   DialogActions,
 } from "@mui/material";
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 function MenuAccount(props) {
   const navigate = useNavigate();
-  const [anchorEl, setAnchorEl] = useState(null);
   const [confirmDialogOpen, setConfirmDialogOpen] = useState(false);
-
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
 
   const handleQuit = () => {
     setConfirmDialogOpen(true);
